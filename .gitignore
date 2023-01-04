@@ -1,2 +1,3 @@
 /pre-shift-examiner.iml
 /.idea/
+/dockers/postgres/pgdata/pre-shift-examiner-pgdata.tar.zst

@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  pre-shift-examiner-pg:
+    image: postgis/postgis:15-3.3
+    container_name: "pre-shift-examiner-pg"
+    environment:
+      POSTGRES_PASSWORD: redhat90
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5435:5432"
+    networks:
+      pre-shift-examiner-network:
+        aliases:
+          - pre-shift-examiner-db.local
+    volumes:
+      - pre-shift-examiner-pgdata:/var/lib/postgresql/data
+
+networks:
+  pre-shift-examiner-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.3.0/24"
+
+volumes:
+  pre-shift-examiner-pgdata:
+    external: true
