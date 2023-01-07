@@ -3,3 +3,4 @@
 /dockers/postgres/pgdata/pre-shift-examiner-pgdata.tar.zst
 /pre-shift-examiner-middleware/node_modules/
 /pre-shift-examiner-middleware/pre-shift-examiner-middleware.iml
+/pre-shift-examiner-middleware/.env
