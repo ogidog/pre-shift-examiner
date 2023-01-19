@@ -1,6 +1,6 @@
 <template>
   <div class="personnel-id_container__div">
-      <input class="personnel-id__input" type="text" v-model="store.personnelid" autofocus/>
+      <input class="personnel-id__input" type="text" v-model="store.personnelId" autofocus/>
       <label class="personnel-id__label">Введите табельный номер:</label>
   </div>
 </template>
@@ -10,6 +10,7 @@ import {store} from "@/store/store";
 
 export default {
   name: "PersonnelidInput",
+
   setup() {
     return {
       store

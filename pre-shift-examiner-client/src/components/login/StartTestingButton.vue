@@ -1,5 +1,5 @@
 <template>
-  <button class="start-testing__button" @click="this.$router.push({path: '/testing'})" role="button">Начать тестирование</button>
+  <button class="start-testing__button" @click="onClick" role="button">Начать тестирование</button>
 </template>
 
 <script>
@@ -7,9 +7,16 @@ import {store} from "@/store/store";
 
 export default {
   name: "StartTestingButton",
+
   setup() {
     return {
       store
+    }
+  },
+
+  methods: {
+    onClick: () => {
+      store.startTesting()
     }
   }
 }

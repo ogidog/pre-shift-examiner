@@ -1,16 +1,21 @@
 import {reactive} from 'vue'
+import axios from "axios";
 
-// eslint-disable-next-line no-unused-vars
-const getQuestions = () => {
-}
-const login = () => {
-}
 
 export const store = reactive({
-    personnelid: "НИ00-0011",
+    personnelId: "НИ00-0011",
+    user: null,
 
-    startTesting() {
-        login()
-        this.$router.push({path: "/testing"})
+    async startTesting() {
+        let user = await axios.get("http://pre-shift-examiner-server.local/api/auth/login",
+            {
+                params: {
+                    personnel_id: store.personnelId
+                }
+            });
+
+        if (user) {
+            this.$router.push({path: "/testing"})
+        }
     }
 });

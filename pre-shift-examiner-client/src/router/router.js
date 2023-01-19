@@ -1,11 +1,11 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import LoginForm from "@/components/login/LoginForm";
 import QuestionsForm from "@/components/testing/QuestionsForm";
-import {store} from "@/store/store";
+//import {store} from "@/store/store";
 
 const routes = [
-    {path: "/", name:"LoginForm", component: LoginForm},
-    {path: "/testing", name:"QuestionForm", component: QuestionsForm}
+    {path: "/", name: "LoginForm", component: LoginForm},
+    {path: "/testing", name: "QuestionForm", component: QuestionsForm}
 ]
 
 const router = createRouter({
@@ -14,7 +14,9 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log(to, from, store.personnelid)
+    if (to.path === "/testing") {
+        console.log(to, from)
+    }
     next()
 })
 

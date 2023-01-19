@@ -1,10 +1,10 @@
 import express, {Express} from "express";
 import dotenv from "dotenv";
 
-const app: Express = express();
-const port = process.env.PORT || '3001';
+dotenv.config();
 
-dotenv.config()
+const app: Express = express();
+const port: string = process.env.PORT || '3031';
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -23,7 +23,7 @@ app.use("/api/testing", testingRouter);
 app.use("/api/auth", loginRouter);
 
 app.listen(port, () => {
-    console.log("Server is running.")
+    console.log(`Server is ran on ${port} port.`)
 })
 
 
