@@ -17,8 +17,10 @@ app.use(function (req, res, next) {
 });
 
 import testingRouter from "./routes/testing-router";
+import loginRouter from "./routes/login-router"
 
 app.use("/api/testing", testingRouter);
+app.use("/api/auth", loginRouter);
 
 app.listen(port, () => {
     console.log("Server is running.")
