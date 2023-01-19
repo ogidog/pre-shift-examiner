@@ -4,23 +4,22 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 
-export default {
+import {defineComponent} from "vue";
+
+export default defineComponent({
   name: 'App',
-}
+})
 </script>
 
 <style>
-
 body {
   margin: 0;
 }
-
 .container {
   width: 100vw;
   height: 100vh;
-
   border: 0px solid red;
 }
 </style>

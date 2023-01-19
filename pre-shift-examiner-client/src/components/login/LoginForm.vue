@@ -5,14 +5,16 @@
   </div>
 </template>
 
-<script>
-import PersonnelidInput from "@/components/login/PersonnelidInput";
-import StartTestingButton from "@/components/login/StartTestingButton";
+<script lang="ts">
 
-export default {
+import PersonnelidInput from "@/components/login/PersonnelidInput.vue";
+import StartTestingButton from "@/components/login/StartTestingButton.vue";
+import {defineComponent} from "vue";
+
+export default defineComponent({
   name: "LoginForm",
   components: {PersonnelidInput, StartTestingButton}
-}
+});
 </script>
 
 <style scoped>

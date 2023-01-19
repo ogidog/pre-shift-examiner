@@ -2,7 +2,7 @@
   <button class="start-testing__button" @click="onClick" role="button">Начать тестирование</button>
 </template>
 
-<script>
+<script lang="ts">
 import {store} from "@/store/store";
 
 export default {

@@ -1,21 +1,17 @@
-import {reactive} from 'vue'
+import { reactive } from 'vue';
 import axios from "axios";
-
-
+import router from "@/router/router";
 export const store = reactive({
     personnelId: "НИ00-0011",
-    user: null,
-
     async startTesting() {
-        let user = await axios.get("http://pre-shift-examiner-server.local/api/auth/login",
-            {
-                params: {
-                    personnel_id: store.personnelId
-                }
-            });
-
+        const user = await axios.get("http://pre-shift-examiner-server.local/api/auth/login", {
+            params: {
+                personnel_id: store.personnelId
+            }
+        });
         if (user) {
-            this.$router.push({path: "/testing"})
+            router.push({ path: "/testing" });
         }
     }
 });
+//# sourceMappingURL=store.js.map
