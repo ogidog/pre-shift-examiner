@@ -1,20 +1,19 @@
 <template>
   <div class="container">
-    <QuestionContainer :question="this.question"/>
+    <QuestionContainer :question="this.store.questions[currentQuestionIndex]"/>
     <div>
-      <button @click="$router.push('/')">Завершить</button>
-      <button @click="$router.push('/')">Далее</button>
+      <button @click="$router.push('/')" v-show="currentQuestionIndex === this.store.questions.length - 1">Завершить
+      </button>
+      <button @click="onNextQuestion"
+              v-show="currentQuestionIndex < this.store.questions.length - 1 && this.store.questions.length > 1">Далее
+      </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-
-// @ts-ignore
-import {Question} from "pre-shift-examiner-middleware";
-
+import {defineComponent} from "vue";
 import {store} from "@/store/store";
-import {defineComponent, PropType} from "vue";
 import QuestionContainer from "@/components/testing/QuestionContainer.vue";
 
 export default defineComponent({
@@ -22,22 +21,30 @@ export default defineComponent({
   name: "QuestionsForm",
   components: {QuestionContainer},
 
-  data() {
-    return {
-      question: {} as PropType<Question>
-    }
-  },
-
   setup() {
     return {
       store
     }
   },
 
-  mounted() {
-    store.getQuestions()
+  data() {
+    return {
+      currentQuestionIndex: 0 as number
+    }
+  },
+
+  created() {
+    store.getQuestions();
+  },
+
+  methods: {
+    onNextQuestion() {
+      this.currentQuestionIndex++;
+    }
   }
+
 })
+
 </script>
 
 <style scoped>

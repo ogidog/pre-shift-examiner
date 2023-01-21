@@ -22,5 +22,10 @@ export interface Settings {
 export interface Question {
     id: number,
     content: string,
-    options: { id: number, content: string }[],
+    options: Option[],
+}
+
+export interface Option {
+    id: number,
+    content: string
 }

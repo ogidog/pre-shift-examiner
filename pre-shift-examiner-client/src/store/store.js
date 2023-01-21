@@ -40,7 +40,6 @@ export const store = reactive({
             }
         });
         this.questions = responseObject.questions;
-        console.log(this.questions);
     }
 });
 //# sourceMappingURL=store.js.map

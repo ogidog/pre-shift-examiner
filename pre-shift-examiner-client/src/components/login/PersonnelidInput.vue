@@ -1,7 +1,7 @@
 <template>
-  <div class="personnel-id_container__div">
-    <input class="personnel-id__input" type="text" v-model="store.user.personnelId" autofocus/>
-    <label class="personnel-id__label">Введите табельный номер:</label>
+  <div class="personnel-id-container">
+    <input class="personnel-id-container__input" type="text" v-model="store.user.personnelId" autofocus/>
+    <label class="personnel-id-container__label">Введите табельный номер:</label>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 
 <style scoped>
 
-.personnel-id_container__div {
+.personnel-id-container {
   display: flex;
   justify-content: center;
 
@@ -32,18 +32,19 @@ export default {
   width: fit-content;
 }
 
-.personnel-id__label {
+.personnel-id-container__label {
   position: absolute;
   top: 5px;
   left: 10px;
 
   color: #bdbdbd;
 
-  font-family: Arial;
+  font-family: "PTC55F";
   font-size: 0.8rem;
+  font-weight: bold;
 }
 
-.personnel-id__input {
+.personnel-id-container__input {
 
   width: 310px;
   height: 35px;
@@ -57,11 +58,11 @@ export default {
   border: 1px solid #bdbdbd;
   border-radius: 6px;
 
-  font-family: Arial;
+  font-family: "Days";
   font-size: 1.2em;
 }
 
-.personnel-id__input:focus {
+.personnel-id-container__input:focus {
   border-color: #bdbdbd;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
