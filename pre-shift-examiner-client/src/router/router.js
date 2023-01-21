@@ -11,7 +11,7 @@ const router = createRouter({
 });
 router.beforeEach((to, from, next) => {
     if (to.path === "/testing") {
-        console.log(to, from);
+        console.log();
     }
     next();
 });

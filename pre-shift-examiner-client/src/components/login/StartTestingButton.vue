@@ -16,7 +16,7 @@ export default {
 
   methods: {
     onClick: () => {
-      store.startTesting()
+      store.login()
     }
   }
 }

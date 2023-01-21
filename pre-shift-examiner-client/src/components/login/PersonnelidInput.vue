@@ -1,7 +1,7 @@
 <template>
   <div class="personnel-id_container__div">
-      <input class="personnel-id__input" type="text" v-model="store.personnelId" autofocus/>
-      <label class="personnel-id__label">Введите табельный номер:</label>
+    <input class="personnel-id__input" type="text" v-model="store.user.personnelId" autofocus/>
+    <label class="personnel-id__label">Введите табельный номер:</label>
   </div>
 </template>
 
@@ -61,7 +61,7 @@ export default {
   font-size: 1.2em;
 }
 
-.personnel-id__input:focus{
+.personnel-id__input:focus {
   border-color: #bdbdbd;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
