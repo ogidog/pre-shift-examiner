@@ -1,5 +1,6 @@
 import pool from "./db-services"
 import {QueryResultRow} from "pg";
+import {Question, ResponseObject, Settings} from "../types";
 
 class TestingService {
 
@@ -31,7 +32,8 @@ class TestingService {
             queryText = `SELECT question.question_id,
                                 question.question_content,
                                 array_agg(work.options.id)      AS option_ids,
-                                array_agg(work.options.content) AS option_contents
+                                array_agg(work.options.content) AS option_contents,
+                                count(work.options.correct) filter ( where  work.options.correct) as correct_true
                          FROM work.options,
                               (SELECT work.questions.id      AS question_id,
                                       work.questions.content AS question_content

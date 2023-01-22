@@ -3,6 +3,7 @@
     <div class="question-container__content">
       {{ this.$props.question?.content }}
     </div>
+    <QuestionOption :option="this.$props.question?.options[0]" :type="'checkbox'"/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 import {Question} from "pre-shift-examiner-middleware";
 import {defineComponent, PropType} from "vue";
+import QuestionOption from "@/components/testing/QuestionOption.vue";
 
 export default defineComponent({
 
   name: "QuestionContainer",
-  props: {question: {} as PropType<Question>}
+  props: {question: {} as PropType<Question>},
+  components: {QuestionOption}
 
 })
 </script>
@@ -37,6 +40,9 @@ export default defineComponent({
     font-family: "Days";
     font-weight: bold;
     font-size: 1.2em;
+
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
 }
 

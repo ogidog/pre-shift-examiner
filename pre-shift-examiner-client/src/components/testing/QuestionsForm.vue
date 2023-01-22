@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="form-container" v-if="this.store.questions">
     <QuestionContainer :question="this.store.questions[currentQuestionIndex]"/>
     <div>
       <button @click="$router.push('/')" v-show="currentQuestionIndex === this.store.questions.length - 1">Завершить
@@ -50,7 +50,7 @@ export default defineComponent({
 <style scoped>
 
 @media (max-width: 1024px) {
-  .container {
+  .form-container {
     display: flex;
     flex-direction: column;
 

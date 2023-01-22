@@ -1,5 +1,6 @@
 import {QueryResultRow} from "pg";
 import pool from "./db-services";
+import {ResponseObject, User} from "../types";
 
 class LoginService {
 
