@@ -3,27 +3,15 @@
     <div v-if="this.$props.type==='checkbox'" class="option-container__checkbox">
       <input :id="this.$props.option.id" type="checkbox" :value="this.$props.option.id"/>
       <label :for="this.$props.option.id">
+        <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" width="50px" height="50px">
+          <rect x="10" y="10" width="30" height="30" rx="5" ry="5" fill="none" stroke-width="2" stroke="black"/>
+          <path d="M5,10 l25,50" fill="none" stroke="black" stroke-width="5"/>
+        </svg>
         {{ this.$props.option.content }}
       </label>
-
-      <!--      <div class="checkbox-wrapper-23">-->
-      <!--        <input type="checkbox" id="check-23"/>-->
-      <!--        <label for="check-23" style="&#45;&#45;size: 30px">-->
-      <!--          <svg viewBox="0,0,50,50">-->
-      <!--            <path d="M5 30 L 20 45 L 45 5"></path>-->
-      <!--          </svg>-->
-      <!--        </label>-->
-      <!--      </div>-->
-    </div>
-    <div>
-      <input id="box1" type="checkbox" />
-      <label for="box1">Checkbox 1</label>
-      <input id="box2" type="checkbox" />
-      <label for="box2">Checkbox 2</label>
-      <input id="box3" type="checkbox" />
-      <label for="box3">Checkbox 3</label>
     </div>
   </div>
+
 </template>
 
 <script lang="ts">
