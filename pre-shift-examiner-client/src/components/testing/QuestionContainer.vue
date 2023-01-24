@@ -3,7 +3,9 @@
     <div class="question-container__content">
       {{ this.$props.question?.content }}
     </div>
-    <QuestionOption :option="this.$props.question?.options[0]" :type="'checkbox'"/>
+    <QuestionOption v-for="(option) in this.$props.question?.options" :key="option.id"
+                    :option="option"
+                    :type="this.$props.question?.multiple?'checkbox':'radio'"/>
   </div>
 </template>
 
@@ -32,7 +34,7 @@ export default defineComponent({
     align-items: center;
 
     width: 100%;
-    height: 100%;
+    height: fit-content;
   }
 
   .question-container__content {

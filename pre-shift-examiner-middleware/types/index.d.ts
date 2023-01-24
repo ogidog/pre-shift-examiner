@@ -23,6 +23,7 @@ export interface Question {
     id: number,
     content: string,
     options: Option[],
+    multiple: boolean
 }
 
 export interface Option {

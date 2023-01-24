@@ -18,6 +18,7 @@ const initStore = {
 };
 export const store = reactive({
     ...initStore,
+
     async login() {
         const responseObject = await axios.get(process.env.VUE_APP_WEB_SERVER_PROTOCOL + "://" +
             process.env.VUE_APP_WEB_SERVER_HOST +
@@ -31,6 +32,7 @@ export const store = reactive({
             await router.push({ path: "/testing" });
         }
     },
+
     async getQuestions() {
         const responseObject = await axios.get(process.env.VUE_APP_WEB_SERVER_PROTOCOL + "://" +
             process.env.VUE_APP_WEB_SERVER_HOST +

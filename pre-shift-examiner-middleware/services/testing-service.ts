@@ -31,9 +31,9 @@ class TestingService {
 
             queryText = `SELECT question.question_id,
                                 question.question_content,
-                                array_agg(work.options.id)      AS option_ids,
-                                array_agg(work.options.content) AS option_contents,
-                                count(work.options.correct) filter ( where  work.options.correct) as correct_true
+                                array_agg(work.options.id)                                       AS option_ids,
+                                array_agg(work.options.content)                                  AS option_contents,
+                                count(work.options.correct) filter ( where work.options.correct) as correct_true_counter
                          FROM work.options,
                               (SELECT work.questions.id      AS question_id,
                                       work.questions.content AS question_content
@@ -50,13 +50,20 @@ class TestingService {
 
             let questions: Question[] = [];
             for (let i = 0; i < queryResultRows.length; i++) {
-                const {question_id, question_content, option_ids, option_contents} = queryResultRows[i];
+                const {
+                    question_id,
+                    question_content,
+                    option_ids,
+                    option_contents,
+                    correct_true_counter
+                } = queryResultRows[i];
                 let question: Question = {
                     id: question_id,
                     content: question_content,
                     options: option_ids.map((id: number, index: number) => {
                         return {id: id, content: option_contents[index]}
-                    })
+                    }),
+                    multiple: correct_true_counter > 1 ? true : false
                 };
                 questions.push(question);
             }

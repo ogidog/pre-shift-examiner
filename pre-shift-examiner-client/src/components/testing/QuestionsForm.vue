@@ -1,13 +1,7 @@
 <template>
   <div class="form-container" v-if="this.store.questions">
     <QuestionContainer :question="this.store.questions[currentQuestionIndex]"/>
-    <div>
-      <button @click="$router.push('/')" v-show="currentQuestionIndex === this.store.questions.length - 1">Завершить
-      </button>
-      <button @click="onNextQuestion"
-              v-show="currentQuestionIndex < this.store.questions.length - 1 && this.store.questions.length > 1">Далее
-      </button>
-    </div>
+    <ControlButtonsContainer/>
   </div>
 </template>
 
@@ -15,11 +9,12 @@
 import {defineComponent} from "vue";
 import {store} from "@/store/store";
 import QuestionContainer from "@/components/testing/QuestionContainer.vue";
+import ControlButtonsContainer from "@/components/testing/ControlButtonsContainer.vue";
 
 export default defineComponent({
 
   name: "QuestionsForm",
-  components: {QuestionContainer},
+  components: {QuestionContainer, ControlButtonsContainer},
 
   setup() {
     return {
@@ -27,23 +22,11 @@ export default defineComponent({
     }
   },
 
-  data() {
-    return {
-      currentQuestionIndex: 0 as number
-    }
-  },
-
   created() {
     store.getQuestions();
   },
 
-  methods: {
-    onNextQuestion() {
-      this.currentQuestionIndex++;
-    }
-  }
-
-})
+});
 
 </script>
 
@@ -54,7 +37,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
 
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 
     width: 100%;
@@ -65,7 +48,7 @@ export default defineComponent({
 }
 
 @media (min-width: 1025px) {
-  .container {
+  .form-container {
     position: absolute;
     top: 50%;
     left: 50%;
