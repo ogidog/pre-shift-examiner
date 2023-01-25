@@ -1,6 +1,6 @@
 <template>
   <div class="form-container" v-if="this.store.questions">
-    <QuestionContainer :question="this.store.questions[currentQuestionIndex]"/>
+    <QuestionContainer :question="this.store.questions[this.store.currentQuestionIndex]"/>
     <ControlButtonsContainer/>
   </div>
 </template>
@@ -22,9 +22,9 @@ export default defineComponent({
     }
   },
 
-  created() {
-    store.getQuestions();
-  },
+  async beforeRouteEnter() {
+    await store.getQuestions();
+  }
 
 });
 

@@ -1,37 +1,28 @@
 <template>
-  <div class="control-buttons-container">
-
-  </div>
+  <button @click="$router.push('/')"
+          v-show="this.store.questions.length===1 || this.store.currentQuestionIndex===this.store.questions.length-1">
+    Завершить
+  </button>
 </template>
 
-<script lang="ts">
+<script>
 import {defineComponent} from "vue";
 import {store} from "@/store/store";
 
 export default defineComponent({
-  name: "ControlButtonsContainer",
-  props: {currentQuestionIndex: Number},
+  name: "FinishTestingButton",
 
   setup() {
     return {
       store
     }
-  },
-
+  }
 });
 
 </script>
 
 <style scoped>
-
-.control-buttons-container {
-  display: flex;
-  justify-content: center;
-
-  width: 95%;
-}
-
-.control-buttons-container button {
+button {
   background-color: #5488f1;
   border-radius: 8px;
   border-width: 0;
@@ -49,5 +40,4 @@ export default defineComponent({
   vertical-align: baseline;
   white-space: nowrap;
 }
-
 </style>

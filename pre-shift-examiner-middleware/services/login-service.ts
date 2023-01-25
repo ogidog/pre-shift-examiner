@@ -15,7 +15,7 @@ class LoginService {
                                 work.users.setting_id
                          FROM work.users
                          WHERE work.users.personnel_id = $1`;
-        let queryValues = [personnel_id];
+        let queryValues = ['НИ00-0011']; //[personnel_id];
         let queryResultRows: QueryResultRow[] = (await pool.query(queryText, queryValues)).rows;
 
         if (queryResultRows.length != 1) return {...responseObject, httpStatusCode: 401};

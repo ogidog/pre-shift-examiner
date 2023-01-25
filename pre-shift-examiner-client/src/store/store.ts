@@ -1,28 +1,12 @@
 import {reactive} from 'vue'
 import axios from "axios";
 import router from "@/router/router";
-// @ts-ignore
-import {ResponseObject, User} from "pre-shift-examiner-middleware";
-
-
-const initStore = {
-    user: {
-        id: NaN,
-        personnelId: "НИ00-0011",
-        surname: "",
-        name: "",
-        patronymic: "",
-        settingId: NaN
-    },
-    questions: [{
-        id: NaN,
-        content: "",
-        options: [{id: NaN, content: ""}]
-    }],
-}
+import {ResponseObject, User, Question} from "pre-shift-examiner-middleware";
 
 export const store = reactive({
-    ...initStore,
+    user: {} as User,
+    questions: [] as Question[],
+    currentQuestionIndex: 0,
 
     async login() {
         const responseObject: ResponseObject = await axios.get(
@@ -53,5 +37,12 @@ export const store = reactive({
             });
 
         this.questions = responseObject.questions!;
+    },
+
+    setDefaultStore() {
+        this.user = {} as User;
+        this.questions = [] as Question[];
+        this.currentQuestionIndex = 0;
     }
+
 });

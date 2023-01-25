@@ -1,11 +1,11 @@
 <template>
   <div class="question-container">
     <div class="question-container__content">
-      {{ this.$props.question?.content }}
+      {{ this.$props.question.content }}
     </div>
-    <QuestionOption v-for="(option) in this.$props.question?.options" :key="option.id"
+    <QuestionOption v-for="(option) in this.$props.question.options" :key="option.id"
                     :option="option"
-                    :type="this.$props.question?.multiple?'checkbox':'radio'"/>
+                    :type="this.$props.question.multiple?'checkbox':'radio'"/>
   </div>
 </template>
 

@@ -1,29 +1,19 @@
 <template>
-  <button class="start-testing__button" @click="onClick" role="button">Начать тестирование</button>
+  <button @click="()=>this.store.currentQuestionIndex++"
+          v-show="this.store.questions.length>1 && this.store.currentQuestionIndex<this.store.questions.length-1">
+    Далее
+  </button>
 </template>
 
-<script lang="ts">
-import {store} from "@/store/store";
-
+<script>
 export default {
-  name: "StartTestingButton",
+  name: "NextQuestionButton",
 
-  setup() {
-    return {
-      store
-    }
-  },
-
-  methods: {
-    onClick: () => {
-      store.login()
-    }
-  }
 }
 </script>
 
 <style scoped>
-.start-testing__button {
+button {
   background-color: #5488f1;
   border-radius: 8px;
   border-width: 0;

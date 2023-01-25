@@ -1,24 +1,10 @@
 import { reactive } from 'vue';
 import axios from "axios";
 import router from "@/router/router";
-const initStore = {
-    user: {
-        id: NaN,
-        personnelId: "НИ00-0011",
-        surname: "",
-        name: "",
-        patronymic: "",
-        settingId: NaN
-    },
-    questions: [{
-            id: NaN,
-            content: "",
-            options: [{ id: NaN, content: "" }]
-        }],
-};
 export const store = reactive({
-    ...initStore,
-
+    user: {},
+    questions: [],
+    currentQuestionIndex: 0,
     async login() {
         const responseObject = await axios.get(process.env.VUE_APP_WEB_SERVER_PROTOCOL + "://" +
             process.env.VUE_APP_WEB_SERVER_HOST +
@@ -32,7 +18,6 @@ export const store = reactive({
             await router.push({ path: "/testing" });
         }
     },
-
     async getQuestions() {
         const responseObject = await axios.get(process.env.VUE_APP_WEB_SERVER_PROTOCOL + "://" +
             process.env.VUE_APP_WEB_SERVER_HOST +
@@ -42,6 +27,11 @@ export const store = reactive({
             }
         });
         this.questions = responseObject.questions;
+    },
+    setDefaultStore() {
+        this.user = {};
+        this.questions = [];
+        this.currentQuestionIndex = 0;
     }
 });
 //# sourceMappingURL=store.js.map

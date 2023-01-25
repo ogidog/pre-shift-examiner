@@ -1,6 +1,6 @@
 export interface User {
     id: number,
-    personnelId: string,
+    personnelId: string ,
     surname: string,
     name: string,
     patronymic: string,
