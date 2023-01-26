@@ -1,6 +1,6 @@
 <template>
-  <button @click="()=>this.store.currentQuestionIndex++"
-          v-show="this.store.questions.length>1 && this.store.currentQuestionIndex<this.store.questions.length-1">
+  <button @click="()=>this.storeTest.currentQuestionIndex++"
+          v-show="this.storeTest.questions.length>1 && this.storeTest.currentQuestionIndex<this.storeTest.questions.length-1">
     Далее
   </button>
 </template>

@@ -1,20 +1,20 @@
 <template>
   <button @click="$router.push('/')"
-          v-show="this.store.questions.length===1 || this.store.currentQuestionIndex===this.store.questions.length-1">
+          v-show="this.storeTest.questions.length===1 || this.storeTest.currentQuestionIndex===this.storeTest.questions.length-1">
     Завершить
   </button>
 </template>
 
 <script>
 import {defineComponent} from "vue";
-import {store} from "@/store/store";
+import {storeTest} from "@/storeTest/storeTest";
 
 export default defineComponent({
   name: "FinishTestingButton",
 
   setup() {
     return {
-      store
+      storeTest: storeTest
     }
   }
 });

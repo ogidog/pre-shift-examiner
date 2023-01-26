@@ -1,13 +1,13 @@
 <template>
-  <div class="form-container" v-if="this.store.questions">
-    <QuestionContainer :question="this.store.questions[this.store.currentQuestionIndex]"/>
+  <div class="form-container" v-if="this.storeTest.questions">
+    <QuestionContainer :question="this.storeTest.questions[this.storeTest.currentQuestionIndex]"/>
     <ControlButtonsContainer/>
   </div>
 </template>
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import {store} from "@/store/store";
+import {storeTest} from "@/storeTest/storeTest";
 import QuestionContainer from "@/components/testing-form/QuestionContainer.vue";
 import ControlButtonsContainer from "@/components/testing-form/ControlButtonsContainer.vue";
 
@@ -18,12 +18,12 @@ export default defineComponent({
 
   setup() {
     return {
-      store
+      storeTest: storeTest
     }
   },
 
   async beforeRouteEnter() {
-    await store.getQuestions();
+    await storeTest.getQuestions();
   }
 
 });

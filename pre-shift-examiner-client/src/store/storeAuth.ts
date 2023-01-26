@@ -3,7 +3,7 @@ import axios from "axios";
 import router from "@/router/router";
 import {ResponseObject, User} from "pre-shift-examiner-middleware";
 
-export const authStore = reactive({
+export const storeAuth = reactive({
     user: {} as User,
 
     async login() {

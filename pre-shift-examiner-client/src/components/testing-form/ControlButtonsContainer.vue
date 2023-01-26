@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import {store} from "@/store/store";
+import {storeTest} from "@/storeTest/storeTest";
 
 export default defineComponent({
   name: "ControlButtonsContainer",
@@ -14,7 +14,7 @@ export default defineComponent({
 
   setup() {
     return {
-      store
+      storeTest: storeTest
     }
   },
 
