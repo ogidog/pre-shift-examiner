@@ -1,7 +1,6 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import LoginForm from "@/components/login-form/LoginForm.vue";
+import {LoginForm} from "@/components/login-form";
 import QuestionsForm from "@/components/testing-form/QuestionsForm.vue";
-import {store} from "@/store/store";
 
 const routes = [
     {path: "/", name: "LoginForm", component: LoginForm},

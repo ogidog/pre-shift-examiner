@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
 import axios from "axios";
 import router from "@/router/router";
+
 export const store = reactive({
     user: {},
     questions: [],
