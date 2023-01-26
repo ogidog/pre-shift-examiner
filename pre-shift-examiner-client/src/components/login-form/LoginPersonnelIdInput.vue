@@ -5,18 +5,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {store} from "@/store/store";
 
-export default {
-  name: "PersonnelidInput",
-
-  setup() {
-    return {
-      store
-    }
-  }
-}
 </script>
 
 <style scoped>

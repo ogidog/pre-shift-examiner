@@ -13,7 +13,7 @@
 
 import {Question} from "pre-shift-examiner-middleware";
 import {defineComponent, PropType} from "vue";
-import QuestionOption from "@/components/testing/QuestionOption.vue";
+import QuestionOption from "@/components/testing-form/QuestionOption.vue";
 
 export default defineComponent({
 

@@ -1,20 +1,15 @@
 <template>
   <div class="container">
-    <PersonnelidInput/>
-    <StartTestingButton/>
+    <LoginPersonnelIdInput/>
+    <LoginStartTestButton/>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 
-import PersonnelidInput from "@/components/login/PersonnelidInput.vue";
-import StartTestingButton from "@/components/login/StartTestingButton.vue";
-import {defineComponent} from "vue";
+import LoginPersonnelIdInput from "./LoginPersonnelIdInput.vue";
+import LoginStartTestButton from "./LoginStartTestingButton.vue";
 
-export default defineComponent({
-  name: "LoginForm",
-  components: {PersonnelidInput, StartTestingButton}
-});
 </script>
 
 <style scoped>

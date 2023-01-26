@@ -1,29 +1,18 @@
-<template>
-  <button class="start-testing__button" @click="onClick" role="button">Начать тестирование</button>
-</template>
+<script setup lang="ts">
+import {defineProps} from 'vue';
 
-<script lang="ts">
-import {store} from "@/store/store";
+const props = defineProps({text: String});
 
-export default {
-  name: "StartTestingButton",
-
-  setup() {
-    return {
-      store
-    }
-  },
-
-  methods: {
-    onClick: () => {
-      store.login()
-    }
-  }
-}
 </script>
 
+<template>
+  <button>
+    {{ props.text }}
+  </button>
+</template>
+
 <style scoped>
-.start-testing__button {
+button {
   background-color: #5488f1;
   border-radius: 8px;
   border-width: 0;

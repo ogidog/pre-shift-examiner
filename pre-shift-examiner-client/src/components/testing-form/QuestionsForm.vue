@@ -8,8 +8,8 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import {store} from "@/store/store";
-import QuestionContainer from "@/components/testing/QuestionContainer.vue";
-import ControlButtonsContainer from "@/components/testing/ControlButtonsContainer.vue";
+import QuestionContainer from "@/components/testing-form/QuestionContainer.vue";
+import ControlButtonsContainer from "@/components/testing-form/ControlButtonsContainer.vue";
 
 export default defineComponent({
 
