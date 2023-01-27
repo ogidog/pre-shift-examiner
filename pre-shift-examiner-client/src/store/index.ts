@@ -1,4 +1,4 @@
-import {storeTest} from "@/store/storeTest";
-import {storeAuth} from "@/store/storeAuth";
+import {testingStore} from "@/store/testingStore";
+import {userStore} from "@/store/userStore";
 
-export {storeTest, storeAuth}
+export {testingStore, userStore}

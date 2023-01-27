@@ -15,7 +15,8 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "pg": "^8.8.0",
-    "pug": "2.0.0-beta11"
+    "pug": "2.0.0-beta11",
+    "pre-shift-examiner-types": "file:../pre-shift-examiner-types"
   },
   "devDependencies": {
     "@types/express": "^4.17.15",

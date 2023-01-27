@@ -3,9 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import {storeAuth} from "@/store";
+import {userStore} from "@/store";
 import {ButtonA} from "@/helpers/ui/button-a";
 
-const onClick = () => storeAuth.login()
+const onClick = () => userStore.login()
 
 </script>

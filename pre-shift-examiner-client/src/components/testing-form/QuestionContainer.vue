@@ -1,27 +1,22 @@
 <template>
   <div class="question-container">
-    <div class="question-container__content">
-      {{ this.$props.question.content }}
-    </div>
-    <QuestionOption v-for="(option) in this.$props.question.options" :key="option.id"
+    <QuestionText :text="props.question.text"/>
+    <QuestionOption v-for="(option) in props.question.options"
+                    :key="option.id"
                     :option="option"
-                    :type="this.$props.question.multiple?'checkbox':'radio'"/>
+                    :type="props.question.multiple?'checkbox':'radio'"/>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 
-import {Question} from "pre-shift-examiner-middleware";
-import {defineComponent, PropType} from "vue";
-import QuestionOption from "@/components/testing-form/QuestionOption.vue";
+import {IQuestion} from "pre-shift-examiner-types/index";
+import {defineProps, PropType} from "vue";
+import QuestionOption from "./QuestionOption.vue";
+import QuestionText from "./QuestionText.vue";
 
-export default defineComponent({
+const props = defineProps({question: {} as PropType<IQuestion>});
 
-  name: "QuestionContainer",
-  props: {question: {} as PropType<Question>},
-  components: {QuestionOption}
-
-})
 </script>
 
 <style scoped>
@@ -36,20 +31,10 @@ export default defineComponent({
     width: 100%;
     height: fit-content;
   }
-
-  .question-container__content {
-    width: 90%;
-    font-family: "Days";
-    font-weight: bold;
-    font-size: 1.2em;
-
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
 }
 
 @media (min-width: 1025px) {
-  .container {
+  .question-container {
     position: absolute;
     top: 50%;
     left: 50%;

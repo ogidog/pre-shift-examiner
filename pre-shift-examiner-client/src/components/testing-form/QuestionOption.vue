@@ -9,12 +9,12 @@
 </template>
 
 <script lang="ts">
-import {Option} from "pre-shift-examiner-middleware";
+import {IOption} from "pre-shift-examiner-types/index";
 import {defineComponent, PropType} from "vue";
 
 export default defineComponent({
   name: "QuestionOption",
-  props: {option: {} as PropType<Option>, type: {} as PropType<'checkbox' | 'radio'>}
+  props: {option: {} as PropType<IOption>, type: {} as PropType<'checkbox' | 'radio'>}
 })
 
 </script>

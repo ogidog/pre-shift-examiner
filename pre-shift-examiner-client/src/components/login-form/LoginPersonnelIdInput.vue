@@ -1,12 +1,12 @@
 <template>
   <div class="personnel-id-container">
-    <input class="personnel-id-container__input" type="text" v-model="storeAuth.user.personnelId" autofocus/>
+    <input class="personnel-id-container__input" type="text" v-model="userStore.user.personnelId" autofocus/>
     <label class="personnel-id-container__label">Введите табельный номер:</label>
   </div>
 </template>
 
 <script setup lang="ts">
-import {storeAuth} from "@/store";
+import {userStore} from "@/store";
 
 </script>
 

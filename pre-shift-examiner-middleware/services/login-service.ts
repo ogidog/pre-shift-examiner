@@ -1,11 +1,11 @@
 import {QueryResultRow} from "pg";
 import pool from "./db-services";
-import {ResponseObject, User} from "../types";
+import {IResponseObject, IUser} from "pre-shift-examiner-types/index";
 
 class LoginService {
 
-    static async login(personnel_id: string): Promise<ResponseObject> {
-        const responseObject: ResponseObject = {httpStatusCode: 500};
+    static async login(personnel_id: string): Promise<IResponseObject> {
+        const responseObject: IResponseObject = {httpStatusCode: 500};
 
         let queryText = `SELECT work.users.id,
                                 work.users.personnel_id,
@@ -20,7 +20,7 @@ class LoginService {
 
         if (queryResultRows.length != 1) return {...responseObject, httpStatusCode: 401};
 
-        const user: User = {
+        const user: IUser = {
             id: queryResultRows[0].id,
             personnelId: queryResultRows[0].personnel_id,
             surname: queryResultRows[0].surname,

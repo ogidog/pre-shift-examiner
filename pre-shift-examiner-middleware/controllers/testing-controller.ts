@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import TestingService from "../services/testing-service"
+import TestingService from "../services/testing-service";
 
 export async function getQuestions(req: Request, res: Response) {
     const {setting_id} = req.query as { [key: string]: string };
