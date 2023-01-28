@@ -2,7 +2,7 @@
   <div class="notifier-container" v-if="uiStore.notifier.visible"
        :style="uiStore.notifier.error?{'color':'rgba(252, 16, 16, 0.48)'}:{'color':'lightgrey'}">
     {{ uiStore.notifier.message }}
-    <ButtonA text="Закрыть" v-show="uiStore.notifier.error" @click="() => uiStore.notifier.visible=false"/>
+    <ButtonA text="Закрыть" v-show="uiStore.notifier.error" @click="() => uiStore.notifier = {visible: false}"/>
   </div>
   <slot v-else></slot>
 </template>

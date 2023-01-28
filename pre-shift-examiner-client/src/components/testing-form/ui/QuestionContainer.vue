@@ -1,5 +1,5 @@
 <template>
-  <div class="question-container">
+  <div class="question-container" v-if="props.question">
     <QuestionText :text="props.question.text"/>
     <QuestionOption v-for="(option) in props.question.options"
                     :key="option.id"
@@ -9,13 +9,12 @@
 </template>
 
 <script setup lang="ts">
-
 import {IQuestion} from "pre-shift-examiner-types/index";
 import {defineProps, PropType} from "vue";
 import QuestionOption from "./QuestionOption.vue";
 import QuestionText from "./QuestionText.vue";
 
-const props = defineProps({question: {} as PropType<IQuestion>});
+const props = defineProps({question: {} as PropType<IQuestion | undefined>});
 
 </script>
 

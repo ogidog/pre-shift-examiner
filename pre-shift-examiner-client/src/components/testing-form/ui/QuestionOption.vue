@@ -1,21 +1,24 @@
 <template>
-  <div class="option-container">
+  <div class="option-container" @click="optionCheckHandler">
     <input :id="this.$props.option.id" :type="this.$props.type" :value="this.$props.option.id" name="option"/>
     <label :for="this.$props.option.id">
       {{ this.$props.option.content }}
     </label>
   </div>
-
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {IOption} from "pre-shift-examiner-types/index";
-import {defineComponent, PropType} from "vue";
+import {defineProps, PropType} from "vue";
 
-export default defineComponent({
-  name: "QuestionOption",
-  props: {option: {} as PropType<IOption>, type: {} as PropType<'checkbox' | 'radio'>}
-})
+const props = defineProps({option: {} as PropType<IOption>, type: {} as PropType<'checkbox' | 'radio'>});
+
+const optionCheckHandler = (event: Event) => {
+  let targetElem = event.target as HTMLElement;
+  if (targetElem.tagName === "INPUT") {
+    console.log(targetElem.getAttribute("value"))
+  }
+}
 
 </script>
 

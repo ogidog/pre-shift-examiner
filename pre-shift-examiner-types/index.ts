@@ -50,7 +50,8 @@ export interface IError {
 }
 
 export const ErrorMessages = {
-    PERSONNEL_ID_ERROR: "Неправильный табельный номер"
+    PERSONNEL_ID_ERROR: "Неправильный табельный номер",
+    SERVER_ERROR: "Ошибка сервера",
 }
 
 export const NotifierMessages = {

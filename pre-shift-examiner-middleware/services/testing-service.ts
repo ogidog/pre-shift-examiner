@@ -1,6 +1,6 @@
 import pool from "./db-services"
 import {QueryResultRow} from "pg";
-import {IQuestion, IResponseObject, ISettings} from "pre-shift-examiner-types";
+import {IQuestion, IResponseObject, ISettings, ErrorMessages} from "pre-shift-examiner-types";
 
 class TestingService {
 
@@ -17,8 +17,10 @@ class TestingService {
                              WHERE work.settings.id = $1`
             let queryValues = [setting_id];
             let queryResultRows: QueryResultRow[] = (await pool.query(queryText, queryValues)).rows;
-
-            if (queryResultRows.length != 1) return {...responseObject, httpStatusCode: 401};
+            if (queryResultRows.length != 1) return {
+                ...responseObject,
+                error: {message: ErrorMessages.SERVER_ERROR}
+            };
 
             const {
                 number_of_questions_per_test,
@@ -35,7 +37,7 @@ class TestingService {
                                 array_agg(work.options.content)                                  AS option_contents,
                                 count(work.options.correct) filter ( where work.options.correct) as correct_true_counter
                          FROM work.options,
-                              (SELECT work.questions.id      AS question_id,
+                              (SELECT work.questions.id   AS question_id,
                                       work.questions.text AS question_text
                                FROM work.questions ${category_ids_per_test ? 'WHERE category_id = ANY ($1)' : ''}
                                ORDER BY random()
@@ -46,7 +48,7 @@ class TestingService {
             queryValues = [category_ids_per_test, number_of_questions_per_test].filter(value => value != null);
             queryResultRows = (await pool.query(queryText, queryValues)).rows;
 
-            if (queryResultRows.length == 0) return responseObject;
+            if (queryResultRows.length == 0) return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}};
 
             let questions: IQuestion[] = [];
             for (let i = 0; i < queryResultRows.length; i++) {
@@ -71,7 +73,7 @@ class TestingService {
             return {...responseObject, httpStatusCode: 200, questions: questions, settings: settings};
 
         } catch (e) {
-            return responseObject;
+            return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}};
         }
     }
 }

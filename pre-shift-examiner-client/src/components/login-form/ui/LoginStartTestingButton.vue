@@ -13,8 +13,7 @@ const onClick = async () => {
   try {
     uiStore.notifier = {visible: true, message: NotifierMessages.AUTHENTICATION};
     await login();
-    // uiStore.notifier = {visible: false}
-    await router.push("/testing");
+    await router.push({path: "/testing"});
 
   } catch (error: any) {
     uiStore.notifier = {visible: true, message: error.message, error: error};
