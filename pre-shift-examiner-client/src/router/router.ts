@@ -1,5 +1,5 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import {LoginForm} from "@/components/login-form";
+import {LoginForm} from "@/components/login-form/ui";
 import {TestingForm} from "@/components/testing-form";
 import {testingStore, userStore} from "@/store";
 

@@ -1,6 +1,6 @@
 import pool from "./db-services"
 import {QueryResultRow} from "pg";
-import {IQuestion, IResponseObject, ISettings} from "pre-shift-examiner-types/index";
+import {IQuestion, IResponseObject, ISettings} from "pre-shift-examiner-types";
 
 class TestingService {
 

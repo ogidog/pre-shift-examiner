@@ -1,12 +1,15 @@
 <template>
-  <div class="container">
-    <LoginPersonnelIdInput/>
-    <LoginStartTestButton/>
-  </div>
+  <NotifierA>
+    <div class="login-form-container">
+      <LoginPersonnelIdInput/>
+      <LoginStartTestButton/>
+    </div>
+  </NotifierA>
+
 </template>
 
 <script setup lang="ts">
-
+import {NotifierA} from "@/helpers/ui/notifier-a";
 import LoginPersonnelIdInput from "./LoginPersonnelIdInput.vue";
 import LoginStartTestButton from "./LoginStartTestingButton.vue";
 
@@ -15,7 +18,7 @@ import LoginStartTestButton from "./LoginStartTestingButton.vue";
 <style scoped>
 
 @media (max-width: 1024px) {
-  .container {
+  .login-form-container {
     display: flex;
     flex-direction: column;
 
@@ -30,7 +33,7 @@ import LoginStartTestButton from "./LoginStartTestingButton.vue";
 }
 
 @media (min-width: 1025px) {
-  .container {
+  .login-form-container {
     position: absolute;
     top: 50%;
     left: 50%;

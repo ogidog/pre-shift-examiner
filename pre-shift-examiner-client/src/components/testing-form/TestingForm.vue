@@ -1,14 +1,34 @@
 <template>
-  <div class="form-container">
-    <QuestionContainer :question="testingStore.questions[testingStore.currentQuestionIndex]"/>
-    <TestingControlButtonsContainer/>
-  </div>
+  <NotifierA>
+<!--    <div class="form-container">-->
+<!--      <QuestionContainer :question="testingStore.questions[testingStore.currentQuestionIndex]"/>-->
+<!--      <TestingControlButtonsContainer/>-->
+<!--    </div>-->
+  </NotifierA>
 </template>
 
 <script setup lang="ts">
-import {testingStore} from "@/store";
-import QuestionContainer from "./QuestionContainer.vue";
-import TestingControlButtonsContainer from "./TestingControlButtonsContainer.vue";
+import {NotifierA} from "@/helpers/ui/notifier-a";
+import {NotifierMessages} from "pre-shift-examiner-types"
+import {uiStore, userStore} from "@/store";
+//import QuestionContainer from "./QuestionContainer.vue";
+import {startTesting} from "./api"
+//import TestingControlButtonsContainer from "./TestingControlButtonsContainer.vue";
+import {onMounted} from "vue";
+
+onMounted(async () => {
+  try {
+    console.log(uiStore.notifier)
+    uiStore.notifier = {visible: true, message: NotifierMessages.TEST_LOADING};
+    console.log(uiStore.notifier)
+    await startTesting(userStore.user.settingId)
+    // uiStore.notifier = {visible: false};
+
+  } catch (error: any) {
+    console.log(error)
+    // uiStore.notifier = {visible: true, message: error.message, error: error};
+  }
+});
 
 </script>
 

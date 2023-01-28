@@ -11,7 +11,8 @@ export interface IResponseObject {
     httpStatusCode: number,
     questions?: IQuestion[],
     user?: IUser,
-    settings?: ISettings
+    settings?: ISettings,
+    error?: IError,
 }
 
 export interface ISettings {
@@ -32,8 +33,27 @@ export interface IOption {
 }
 
 export interface IResult {
-    userId: typeof IUser.id,
-    questionId: typeof IQuestion.id,
-    option_ids: typeof IOption.id[],
+    userId: IUser["id"],
+    questionId: IQuestion["id"],
+    option_ids: IOption["id"][],
     date_time: number,
+}
+
+export interface INotifier {
+    visible: boolean,
+    message?: string,
+    error?: IError,
+}
+
+export interface IError {
+    message: string,
+}
+
+export const ErrorMessages = {
+    PERSONNEL_ID_ERROR: "Неправильный табельный номер"
+}
+
+export const NotifierMessages = {
+    AUTHENTICATION: "Аутентификация...",
+    TEST_LOADING: "Загрузка теста..."
 }
