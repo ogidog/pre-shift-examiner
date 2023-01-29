@@ -1,5 +1,5 @@
 <template>
-  <div class="option-container" @click="optionCheckHandler">
+  <div class="option-container">
     <input :id="this.$props.option.id" :type="this.$props.type" :value="this.$props.option.id" name="option"/>
     <label :for="this.$props.option.id">
       {{ this.$props.option.content }}
@@ -10,15 +10,9 @@
 <script setup lang="ts">
 import {IOption} from "pre-shift-examiner-types/index";
 import {defineProps, PropType} from "vue";
+import {testingStore} from "@/store";
 
 const props = defineProps({option: {} as PropType<IOption>, type: {} as PropType<'checkbox' | 'radio'>});
-
-const optionCheckHandler = (event: Event) => {
-  let targetElem = event.target as HTMLElement;
-  if (targetElem.tagName === "INPUT") {
-    console.log(targetElem.getAttribute("value"))
-  }
-}
 
 </script>
 

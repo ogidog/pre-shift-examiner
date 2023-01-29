@@ -32,12 +32,7 @@ export interface IOption {
     content: string
 }
 
-export interface IResult {
-    userId: IUser["id"],
-    questionId: IQuestion["id"],
-    option_ids: IOption["id"][],
-    date_time: number,
-}
+export type IAnswer = IOption["id"][]
 
 export interface INotifier {
     visible: boolean,

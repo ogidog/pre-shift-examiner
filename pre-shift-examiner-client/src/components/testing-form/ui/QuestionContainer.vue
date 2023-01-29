@@ -1,11 +1,11 @@
 <template>
-  <div class="question-container" v-if="props.question">
-    <QuestionText :text="props.question.text"/>
-    <QuestionOption v-for="(option) in props.question.options"
-                    :key="option.id"
-                    :option="option"
-                    :type="props.question.multiple?'checkbox':'radio'"/>
-  </div>
+    <div class="question-container" v-if="props.question">
+      <QuestionText :text="props.question.text"/>
+      <QuestionOption v-for="(option) in props.question.options"
+                      :key="option.id"
+                      :option="option"
+                      :type="props.question.multiple?'checkbox':'radio'"/>
+    </div>
 </template>
 
 <script setup lang="ts">
