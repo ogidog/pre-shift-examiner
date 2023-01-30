@@ -10,8 +10,8 @@
 </template>
 
 <script async setup lang="ts">
-import {NotifierA} from "@/helpers/ui/notifier-a";
-import {NotifierMessages, IAnswer} from "pre-shift-examiner-types"
+import {NotifierA} from "@/shared/ui/notifier-a";
+import {NotifierMessages} from "pre-shift-examiner-types"
 import {testingStore, uiStore, userStore} from "@/store";
 import QuestionContainer from "./QuestionContainer.vue";
 import {startTesting} from "../api"
@@ -21,14 +21,16 @@ import router from "@/router/router";
 
 onMounted(async () => {
   try {
-    uiStore.notifier = {visible: true, message: NotifierMessages.TEST_LOADING};
-    await startTesting(userStore.user.settingId)
-    uiStore.notifier = {visible: false};
+    uiStore.notify(true, NotifierMessages.TEST_LOADING);
 
-    testingStore.questions.forEach(question => testingStore.results[question.id] = [] as IAnswer);
+    await startTesting(userStore.user.settingId);
+    await testingStore.initAnswers();
+
+    uiStore.notifier = {visible: false};
 
   } catch (error: any) {
     uiStore.notifier = {visible: true, message: error.message, error: error};
+
     await router.push({path: "/"});
   }
 });

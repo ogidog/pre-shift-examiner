@@ -4,18 +4,19 @@
 </template>
 
 <script setup lang="ts">
+import {IOption} from "pre-shift-examiner-types";
 import {testingStore} from "@/store";
-import {ButtonA} from "@/helpers/ui/button-a";
+import {ButtonA} from "@/shared/ui/button-a";
 
-const nextQuestionHandler = (e:Event) => {
+const nextQuestionHandler = (e: Event) => {
   e.preventDefault()
 
   const form: HTMLFormElement = document.forms.namedItem(testingStore.questions[testingStore.currentQuestionIndex].id.toString())!;
   const formData = new FormData(form as HTMLFormElement)
   for (const value of formData.values()) {
-    testingStore.results[testingStore.questions[testingStore.currentQuestionIndex].id].push(Number(value));
+    testingStore.setAnswer(testingStore.questions[testingStore.currentQuestionIndex].id, Number(value));
   }
-  console.log(testingStore.results)
+
   testingStore.currentQuestionIndex++
 }
 

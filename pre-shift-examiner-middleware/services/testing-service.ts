@@ -1,10 +1,10 @@
 import pool from "./db-services"
 import {QueryResultRow} from "pg";
-import {IQuestion, IResponseObject, ISettings, ErrorMessages} from "pre-shift-examiner-types";
+import {IQuestion, IResponseObject, ISettings, ErrorMessages, IUser, IAnswers} from "pre-shift-examiner-types";
 
 class TestingService {
 
-    static async getQuestions(setting_id: string): Promise<IResponseObject> {
+    static async getQuestions(settingId: IUser["settingId"]): Promise<IResponseObject> {
 
         let responseObject: IResponseObject = {httpStatusCode: 500};
 
@@ -15,7 +15,7 @@ class TestingService {
                                     work.settings.result_display_type
                              FROM work.settings
                              WHERE work.settings.id = $1`
-            let queryValues = [setting_id];
+            let queryValues = [settingId];
             let queryResultRows: QueryResultRow[] = (await pool.query(queryText, queryValues)).rows;
             if (queryResultRows.length != 1) return {
                 ...responseObject,
@@ -72,8 +72,30 @@ class TestingService {
 
             return {...responseObject, httpStatusCode: 200, questions: questions, settings: settings};
 
-        } catch (e) {
+        } catch (error) {
             return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}};
+        }
+    }
+
+    static async saveAnswers(userId: IUser["id"], answers: IAnswers): Promise<IResponseObject> {
+        let responseObject: IResponseObject = {httpStatusCode: 500};
+        const dateTime = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60 * 1000) / 1000);
+
+        try {
+            await pool.query("BEGIN");
+            for (let key in answers) {
+                let queryText = `INSERT INTO work.testing (user_id, question_id, option_ids, date_time)
+                                 VALUES ($1, $2, $3, to_timestamp($4))`;
+                let queryValues = [userId, key, answers[key], dateTime];
+                await pool.query(queryText, queryValues);
+            }
+            await pool.query("COMMIT");
+
+            return {...responseObject, httpStatusCode: 200};
+
+        } catch (error) {
+            await pool.query('ROLLBACK');
+            return {...responseObject, error: {message: ErrorMessages.SAVING_ANSWERS_ERROR}};
         }
     }
 }

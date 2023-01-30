@@ -4,7 +4,7 @@ import {IResponseObject, IUser, ErrorMessages} from "pre-shift-examiner-types";
 
 class LoginService {
 
-    static async login(personnel_id: string): Promise<IResponseObject> {
+    static async login(personnelId: IUser["personnelId"]): Promise<IResponseObject> {
         const responseObject: IResponseObject = {httpStatusCode: 500};
 
         try {
@@ -16,7 +16,7 @@ class LoginService {
                                     work.users.setting_id
                              FROM work.users
                              WHERE work.users.personnel_id = $1`;
-            let queryValues = ['НИ00-0011']; //[personnel_id];
+            let queryValues = ['НИ00-0011']; //[personnelId];
             let queryResultRows: QueryResultRow[] = (await pool.query(queryText, queryValues)).rows;
 
             if (queryResultRows.length != 1) return {
@@ -24,7 +24,6 @@ class LoginService {
                 httpStatusCode: 401,
                 error: {message: ErrorMessages.PERSONNEL_ID_ERROR}
             };
-
 
             const user: IUser = {
                 id: queryResultRows[0].id,

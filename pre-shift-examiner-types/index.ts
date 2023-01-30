@@ -13,6 +13,7 @@ export interface IResponseObject {
     user?: IUser,
     settings?: ISettings,
     error?: IError,
+    results?: any,
 }
 
 export interface ISettings {
@@ -32,7 +33,7 @@ export interface IOption {
     content: string
 }
 
-export type IAnswer = IOption["id"][]
+export type IAnswers = { [key: IQuestion["id"]]: IOption["id"][] }
 
 export interface INotifier {
     visible: boolean,
@@ -47,9 +48,12 @@ export interface IError {
 export const ErrorMessages = {
     PERSONNEL_ID_ERROR: "Неправильный табельный номер",
     SERVER_ERROR: "Ошибка сервера",
+    SAVING_ANSWERS_ERROR: "Ошибка сохранения результатов",
 }
 
 export const NotifierMessages = {
     AUTHENTICATION: "Аутентификация...",
-    TEST_LOADING: "Загрузка теста..."
+    TEST_LOADING: "Загрузка теста...",
+    SAVING_ANSWERS: "Сохранение ответов...",
+    CHECKING_ANSWERS: "Проверка ответов...",
 }

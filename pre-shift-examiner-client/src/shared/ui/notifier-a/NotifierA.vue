@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import {uiStore} from "@/store";
-import {ButtonA} from "@/helpers/ui/button-a";
+import {ButtonA} from "@/shared/ui/button-a";
 
 </script>
 

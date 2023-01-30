@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import {NotifierA} from "@/helpers/ui/notifier-a";
+import {NotifierA} from "@/shared/ui/notifier-a";
 import LoginPersonnelIdInput from "./LoginPersonnelIdInput.vue";
 import LoginStartTestButton from "./LoginStartTestingButton.vue";
 

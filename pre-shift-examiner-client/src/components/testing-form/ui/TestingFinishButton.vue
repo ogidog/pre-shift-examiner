@@ -4,16 +4,28 @@
 </template>
 
 <script setup lang="ts">
-import {finishTesting} from "../api";
-import {testingStore} from "@/store";
-import {ButtonA} from "@/helpers/ui/button-a";
+import {NotifierMessages, INotifier} from "pre-shift-examiner-types";
+import {saveAnswers} from "../api";
+import {testingStore, uiStore, userStore} from "@/store";
+import {ButtonA} from "@/shared/ui/button-a";
+import router from "@/router/router";
 
-const finishTestingHandler = async () => {
+const finishTestingHandler = async (e: Event) => {
   try {
-    await finishTesting();
+    e.preventDefault();
 
-  } catch (e) {
-    console.log()
+    const form: HTMLFormElement = document.forms.namedItem(testingStore.questions[testingStore.currentQuestionIndex].id.toString())!;
+    const formData = new FormData(form as HTMLFormElement)
+    for (const value of formData.values()) {
+      testingStore.setAnswer(testingStore.questions[testingStore.currentQuestionIndex].id, Number(value));
+    }
+    uiStore.notify(true, NotifierMessages.SAVING_ANSWERS);
+    await saveAnswers(userStore.user.id, testingStore.answers);
+    uiStore.notify(true, NotifierMessages.CHECKING_ANSWERS);
+
+  } catch (error: any) {
+    uiStore.notify(true, error.message, error as INotifier["error"]);
+    await router.push({path: "/"});
   }
 
 }
