@@ -1,7 +1,6 @@
 import axios from "axios";
-import {testingStore} from "@/store";
 import {IResponseObject, IUser, IAnswers} from "pre-shift-examiner-types";
-import {API_GET_QUESTIONS, API_SAVE_ANSWERS} from "@/shared/config"
+import {API_GET_QUESTIONS, API_CHECK_ANSWERS} from "@/shared/config"
 
 export const startTesting = async (settingId: IUser["settingId"]) => {
     const responseObject: IResponseObject = await axios.get(
@@ -13,19 +12,20 @@ export const startTesting = async (settingId: IUser["settingId"]) => {
         });
 
     if (responseObject.questions) {
-        testingStore.setQuestions(responseObject.questions)
+        return responseObject.questions;
     } else {
         throw responseObject.error;
     }
 }
 
-export const saveAnswers = async (userId: IUser["id"], answers: IAnswers) => {
+export const checkAnswers = async (userId: IUser["id"], answers: IAnswers) => {
     const responseObject: IResponseObject = await axios.post(
-        API_SAVE_ANSWERS,
+        API_CHECK_ANSWERS,
         {"user-id": userId, answers: answers}
     );
-}
-
-export const finishTesting = async () => {
-
+    if (responseObject.results) {
+        return responseObject.results;
+    } else {
+        throw responseObject.error;
+    }
 }

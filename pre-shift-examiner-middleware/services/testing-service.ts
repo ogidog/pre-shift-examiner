@@ -1,12 +1,12 @@
 import pool from "./db-services"
 import {QueryResultRow} from "pg";
-import {IQuestion, IResponseObject, ISettings, ErrorMessages, IUser, IAnswers} from "pre-shift-examiner-types";
+import {IQuestion, IResponseObject, ISettings, ErrorMessages, IUser, IAnswers, IResult} from "pre-shift-examiner-types";
 
 class TestingService {
 
     static async getQuestions(settingId: IUser["settingId"]): Promise<IResponseObject> {
 
-        let responseObject: IResponseObject = {httpStatusCode: 500};
+        const responseObject: IResponseObject = {httpStatusCode: 500};
 
         try {
             let queryText = `SELECT work.settings.number_of_questions_per_test,
@@ -77,25 +77,52 @@ class TestingService {
         }
     }
 
-    static async saveAnswers(userId: IUser["id"], answers: IAnswers): Promise<IResponseObject> {
-        let responseObject: IResponseObject = {httpStatusCode: 500};
+    static async checkAnswers(userId: IUser["id"], answers: IAnswers, isSaveAnswers: boolean = true): Promise<IResponseObject> {
+
         const dateTime = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60 * 1000) / 1000);
+        const responseObject: IResponseObject = {httpStatusCode: 500};
+        const results = [] as IResult[];
 
         try {
             await pool.query("BEGIN");
+
             for (let key in answers) {
-                let queryText = `INSERT INTO work.testing (user_id, question_id, option_ids, date_time)
-                                 VALUES ($1, $2, $3, to_timestamp($4))`;
+                let queryText = `
+                    WITH correct_options as (SELECT array_agg(id) as ids
+                                             FROM work.options
+                                             WHERE correct
+                                               AND question_id = $2),
+                         insert_result as (
+                             INSERT
+                                 INTO work.answers (user_id, question_id, option_ids, date_time, is_correct)
+                                     VALUES ($1, $2, $3, to_timestamp($4),
+                                             (SELECT ($3 @> correct_options.ids) and
+                                                     (array_length($3, 1) = array_length(correct_options.ids, 1))
+                                              FROM correct_options))
+                                     RETURNING question_id, option_ids, is_correct)
+                    SELECT insert_result.question_id,
+                           insert_result.option_ids,
+                           insert_result.is_correct,
+                           correct_options.ids as correct_options_ids
+                    FROM correct_options,
+                         insert_result
+                `;
                 let queryValues = [userId, key, answers[key], dateTime];
-                await pool.query(queryText, queryValues);
+                let queryResult: IResult = (await pool.query(queryText, queryValues)).rows[0];
+                results.push(queryResult);
             }
-            await pool.query("COMMIT");
 
-            return {...responseObject, httpStatusCode: 200};
+            if (isSaveAnswers) {
+                await pool.query("COMMIT");
+            } else {
+                await pool.query("ROLLBACK");
+            }
 
-        } catch (error) {
+            return {...responseObject, httpStatusCode: 200, results: results};
+
+        } catch (error: any) {
             await pool.query('ROLLBACK');
-            return {...responseObject, error: {message: ErrorMessages.SAVING_ANSWERS_ERROR}};
+            return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}};
         }
     }
 }

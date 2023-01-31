@@ -1,10 +1,11 @@
-import {computed, reactive} from 'vue'
-import {IQuestion, IAnswers, IOption} from "pre-shift-examiner-types/index";
+import {reactive} from 'vue'
+import {IQuestion, IAnswers, IOption, IResult} from "pre-shift-examiner-types/index";
 
 export const testingStore = reactive({
     questions: [] as IQuestion[],
     currentQuestionIndex: 0,
     answers: {} as IAnswers,
+    results: [] as IResult[],
 
     setQuestions(questions: IQuestion[]) {
         this.questions = questions;
@@ -18,6 +19,10 @@ export const testingStore = reactive({
 
     setAnswer(questionId: IQuestion["id"], optionId: IOption["id"]) {
         this.answers[questionId].push(optionId);
+    },
+
+    setResults(results: IResult[]) {
+        this.results = results;
     },
 
     setDefaultState() {

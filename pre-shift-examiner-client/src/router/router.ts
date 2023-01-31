@@ -1,18 +1,24 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import {LoginForm} from "@/components/login-form/ui";
 import {TestingForm} from "@/components/testing-form/ui";
+import {ResultsFrom} from "@/components/results-form/ui";
 
 const routes = [
     {
         path: "/",
-        name: "LoginForm",
+        name: "Login",
         component: LoginForm
     },
     {
         path: "/testing",
-        name: "TestingForm",
+        name: "Testing",
         component: TestingForm
-    }
+    },
+    {
+        path:"/results",
+        name: "Results",
+        component: ResultsFrom
+    },
 ]
 
 const router = createRouter({

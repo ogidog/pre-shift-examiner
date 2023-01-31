@@ -4,7 +4,6 @@
 </template>
 
 <script setup lang="ts">
-import {IOption} from "pre-shift-examiner-types";
 import {testingStore} from "@/store";
 import {ButtonA} from "@/shared/ui/button-a";
 

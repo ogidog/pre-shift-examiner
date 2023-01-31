@@ -23,13 +23,14 @@ onMounted(async () => {
   try {
     uiStore.notify(true, NotifierMessages.TEST_LOADING);
 
-    await startTesting(userStore.user.settingId);
+    const questions  = await startTesting(userStore.user.settingId);
+    await testingStore.setQuestions(questions);
     await testingStore.initAnswers();
 
-    uiStore.notifier = {visible: false};
+    uiStore.notify(false);
 
   } catch (error: any) {
-    uiStore.notifier = {visible: true, message: error.message, error: error};
+    uiStore.notify(true, error.message, error);
 
     await router.push({path: "/"});
   }

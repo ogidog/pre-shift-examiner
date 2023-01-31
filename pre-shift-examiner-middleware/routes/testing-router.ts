@@ -1,9 +1,9 @@
 import express from "express";
-import {getQuestions, saveAnswers} from "../controllers/testing-controller";
+import {getQuestions, checkAnswers} from "../controllers/testing-controller";
 
 const router = express.Router();
 
 router.get("/questions", getQuestions);
-router.post("/save-answers", saveAnswers);
+router.post("/check-answers", checkAnswers);
 
 export default router;

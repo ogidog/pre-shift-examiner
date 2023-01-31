@@ -3,6 +3,7 @@ export const testingStore = reactive({
     questions: [],
     currentQuestionIndex: 0,
     answers: {},
+    results: [],
     setQuestions(questions) {
         this.questions = questions;
     },
@@ -13,6 +14,9 @@ export const testingStore = reactive({
     },
     setAnswer(questionId, optionId) {
         this.answers[questionId].push(optionId);
+    },
+    setResults(results) {
+        this.results = results;
     },
     setDefaultState() {
         this.questions = [];

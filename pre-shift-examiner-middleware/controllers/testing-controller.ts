@@ -9,13 +9,13 @@ export async function getQuestions(req: Request, res: Response) {
     res.status(responseObject.httpStatusCode).send(responseObject);
 }
 
-export async function saveAnswers(req: Request, res: Response) {
+export async function checkAnswers(req: Request, res: Response) {
     const params = req.body;
 
     const userId = params["user-id"] as IUser["id"];
     const answers = params["answers"] as IAnswers;
 
-    const responseObject = await TestingService.saveAnswers(userId, answers);
+    const responseObject = await TestingService.checkAnswers(userId, answers);
     res.status(responseObject.httpStatusCode).send(responseObject);
 
 }
