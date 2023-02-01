@@ -2,12 +2,14 @@
   <div class="c-result-form">
     <ResultsScoreTitle/>
     <ResultsScore/>
+    <ResultsControlButtons/>
   </div>
 </template>
 
 <script setup lang="ts">
 import ResultsScoreTitle from "./ResultsScoreTitle.vue";
 import ResultsScore from "./ResultsScore.vue";
+import ResultsControlButtons from "./ResultsControlButtons.vue";
 
 </script>
 

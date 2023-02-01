@@ -2,10 +2,10 @@ import {reactive} from 'vue'
 import {IQuestion, IAnswers, IOption, IResult} from "pre-shift-examiner-types/index";
 
 export const testingStore = reactive({
-    questions: [] as IQuestion[],
+    questions: <IQuestion[]>[] ,
     currentQuestionIndex: 0,
-    answers: {} as IAnswers,
-    results: [] as IResult[],
+    answers: <IAnswers>{},
+    results: <IResult[]>[],
 
     setQuestions(questions: IQuestion[]) {
         this.questions = questions;
@@ -26,9 +26,9 @@ export const testingStore = reactive({
     },
 
     setDefaultState() {
-        this.questions = [] as IQuestion[];
+        this.questions = <IQuestion[]>[];
         this.currentQuestionIndex = 0;
-        this.answers = {};
+        this.answers = <IAnswers>{};
     },
 
 });
