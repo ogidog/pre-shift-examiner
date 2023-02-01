@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="c-app">
     <router-view></router-view>
   </div>
 </template>
@@ -36,7 +36,7 @@ export default defineComponent({
 body {
   margin: 0;
 }
-.app-container {
+.c-app {
   width: 100vw;
   height: 100vh;
 }

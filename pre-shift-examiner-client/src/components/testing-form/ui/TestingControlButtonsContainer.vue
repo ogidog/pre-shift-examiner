@@ -1,5 +1,5 @@
 <template>
-  <div class="control-buttons-container">
+  <div class="c-control-buttons">
     <TestingNextQuestionButton/>
     <TestingFinishButton/>
   </div>
@@ -14,7 +14,7 @@ import TestingFinishButton from "./TestingFinishButton"
 
 <style scoped>
 
-.control-buttons-container {
+.c-control-buttons {
   display: flex;
   justify-content: center;
 

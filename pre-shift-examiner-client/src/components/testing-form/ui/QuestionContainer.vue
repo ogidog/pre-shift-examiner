@@ -1,5 +1,5 @@
 <template>
-    <div class="question-container" v-if="props.question">
+    <div class="c-question" v-if="props.question">
       <QuestionText :text="props.question.text"/>
       <QuestionOption v-for="(option) in props.question.options"
                       :key="option.id"
@@ -20,7 +20,7 @@ const props = defineProps({question: {} as PropType<IQuestion | undefined>});
 
 <style scoped>
 @media (max-width: 1024px) {
-  .question-container {
+  .c-question {
     display: flex;
     flex-direction: column;
 
@@ -33,7 +33,7 @@ const props = defineProps({question: {} as PropType<IQuestion | undefined>});
 }
 
 @media (min-width: 1025px) {
-  .question-container {
+  .c-question {
     position: absolute;
     top: 50%;
     left: 50%;

@@ -1,5 +1,5 @@
 <template>
-  <div class="personnel-id-container">
+  <div class="c-personnel-id">
     <input class="personnel-id-container__input" type="text" v-model="userStore.user.personnelId" autofocus/>
     <label class="personnel-id-container__label">Введите табельный номер:</label>
   </div>
@@ -12,7 +12,7 @@ import {userStore} from "@/store";
 
 <style scoped>
 
-.personnel-id-container {
+.c-personnel-id {
   display: flex;
   justify-content: center;
 

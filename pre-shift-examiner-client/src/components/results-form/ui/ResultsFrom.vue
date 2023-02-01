@@ -1,5 +1,5 @@
 <template>
-  <div class="result-form-container">
+  <div class="c-result-form">
     <ResultsScoreTitle/>
     <ResultsScore/>
   </div>
@@ -13,7 +13,7 @@ import ResultsScore from "./ResultsScore.vue";
 
 <style scoped>
 @media (max-width: 1024px) {
-  .result-form-container {
+  .c-result-form {
     display: flex;
     flex-direction: column;
 
@@ -28,7 +28,7 @@ import ResultsScore from "./ResultsScore.vue";
 }
 
 @media (min-width: 1025px) {
-  .result-form-container {
+  .c-result-form {
     position: absolute;
     top: 50%;
     left: 50%;

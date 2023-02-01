@@ -1,7 +1,7 @@
 <template>
   <NotifierA>
     <form :id="testingStore.questions[testingStore.currentQuestionIndex].id">
-      <div class="testing-form-container">
+      <div class="c-testing-form">
         <QuestionContainer :question="testingStore.questions[testingStore.currentQuestionIndex]"/>
         <TestingControlButtonsContainer/>
       </div>
@@ -41,7 +41,7 @@ onMounted(async () => {
 <style scoped>
 
 @media (max-width: 1024px) {
-  .testing-form-container {
+  .c-testing-form {
     display: flex;
     flex-direction: column;
 
@@ -56,7 +56,7 @@ onMounted(async () => {
 }
 
 @media (min-width: 1025px) {
-  .testing-form-container {
+  .c-testing-form {
     position: absolute;
     top: 50%;
     left: 50%;

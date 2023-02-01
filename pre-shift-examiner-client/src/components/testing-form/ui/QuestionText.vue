@@ -13,7 +13,7 @@ const props = defineProps({text: String})
 
 <style scoped>
 .text {
-  width: 90%;
+  width: 95%;
   font-family: "Days";
   font-weight: bold;
   font-size: 1.2em;

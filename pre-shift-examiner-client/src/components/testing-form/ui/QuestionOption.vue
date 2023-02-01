@@ -1,5 +1,5 @@
 <template>
-  <div class="option-container">
+  <div class="c-option">
     <input :id="this.$props.option.id" :type="this.$props.type" :value="this.$props.option.id" name="option"/>
     <label :for="this.$props.option.id">
       {{ this.$props.option.content }}
@@ -17,22 +17,21 @@ const props = defineProps({option: {} as PropType<IOption>, type: {} as PropType
 </script>
 
 <style scoped>
-.option-container {
+.c-option {
   display: flex;
   align-items: center;
 
   width: 95%;
-
-  margin-top: 7px;
-  margin-bottom: 7px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 
 }
 
-.option-container * {
+.c-option * {
   cursor: pointer;
 }
 
-.option-container label {
+.c-option label {
   font-size: 1.2em;
   font-family: "PTC55F";
   font-weight: lighter;
@@ -40,7 +39,7 @@ const props = defineProps({option: {} as PropType<IOption>, type: {} as PropType
   margin-left: 7px;
 }
 
-.option-container input {
+.c-option input {
   margin: 0px !important;
   zoom: 2.0;
 }

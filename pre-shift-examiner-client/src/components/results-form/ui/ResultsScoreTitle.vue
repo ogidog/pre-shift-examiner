@@ -1,9 +1,9 @@
 <template>
-  <div class="results-score-title-container">Правильных ответов:</div>
+  <div class="c-title">Правильных ответов:</div>
 </template>
 
 <style scoped>
-.results-score-title-container {
+.c-title {
   font-family: Days;
   font-size: 1.5em;
 
