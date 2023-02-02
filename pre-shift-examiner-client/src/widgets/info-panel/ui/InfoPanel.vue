@@ -1,12 +1,13 @@
 <template>
   <div class="c-info-panel">
-    <div>Иванов В.В.</div>
-    <div>Время:</div>
+    <UserProfile/>
+    <InfoCountDownTimer/>
   </div>
 </template>
 
 <script setup lang="ts">
-
+import UserProfile from "./InfoUserProfile.vue";
+import InfoCountDownTimer from "./InfoCountDownTimer.vue";
 </script>
 
 <style scoped>
@@ -17,5 +18,6 @@
   width: 100%;
   height: fit-content;
 
+  border-bottom: 1px solid rgba(107, 137, 234, 0.78);
 }
 </style>

@@ -23,9 +23,11 @@ onMounted(async () => {
   try {
     uiStore.notify(true, NotifierMessages.TEST_LOADING);
 
-    const questions  = await startTesting(userStore.user.settingId);
-    await testingStore.setQuestions(questions);
+    const responseObject = await startTesting(userStore.user.settingId);
+    let {questions, settings} = responseObject;
+    await testingStore.setQuestions(questions!);
     await testingStore.initAnswers();
+    await testingStore.setSettings(settings!);
 
     uiStore.notify(false);
 
@@ -45,7 +47,7 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
 
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
 
     width: 100%;

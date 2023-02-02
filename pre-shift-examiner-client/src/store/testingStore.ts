@@ -1,11 +1,16 @@
 import {reactive} from 'vue'
-import {IQuestion, IAnswers, IOption, IResult} from "pre-shift-examiner-types/index";
+import {IQuestion, IAnswers, IOption, IResult, ISettings} from "pre-shift-examiner-types/index";
 
 export const testingStore = reactive({
-    questions: <IQuestion[]>[] ,
+    questions: <IQuestion[]>[],
     currentQuestionIndex: 0,
     answers: <IAnswers>{},
     results: <IResult[]>[],
+    settings: <ISettings>{},
+
+    setSettings(settings: ISettings) {
+        this.settings = settings;
+    },
 
     setQuestions(questions: IQuestion[]) {
         this.questions = questions;
@@ -26,9 +31,11 @@ export const testingStore = reactive({
     },
 
     setDefaultState() {
+        this.settings = <ISettings>{};
         this.questions = <IQuestion[]>[];
         this.currentQuestionIndex = 0;
         this.answers = <IAnswers>{};
+        this.results = <IResult[]>[];
     },
 
 });

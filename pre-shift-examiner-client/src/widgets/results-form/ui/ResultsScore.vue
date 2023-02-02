@@ -1,10 +1,11 @@
 <template>
   <div class="c-score">
-    <span :class="score[0] === score[1]?'score-container__span':'score-container__span--color-incorrect'">
-      {{ score[0] }}
+    <span
+        :class="score === testingStore.questions.length?'score-container__span':'score-container__span--color-incorrect'">
+      {{ score || 0 }}
     </span>
     /
-    <span class="score-container__span">{{ score[1] }}</span>
+    <span class="score-container__span">{{ testingStore.questions.length }}</span>
   </div>
 </template>
 
@@ -13,10 +14,10 @@ import {computed} from "vue";
 import {testingStore} from "@/store";
 
 const score = computed(() => {
-  const _ = [0, testingStore.results.length]
+  let _ = 0;
   testingStore.results.forEach((result) => {
     if (result.is_correct) {
-      _[0] += 1;
+      _ += 1;
     }
   });
   return _;

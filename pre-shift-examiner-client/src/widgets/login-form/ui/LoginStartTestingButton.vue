@@ -14,7 +14,7 @@ const onClick = async () => {
     uiStore.notify(true, NotifierMessages.AUTHENTICATION);
     const user = await login();
     userStore.setUser(user);
-    await router.push({path: "/testing"});
+    await router.push({path: "/main/testing"});
 
   } catch (error: any) {
     uiStore.notify(true, error.message, error as INotifier["error"]);

@@ -19,10 +19,11 @@ const finishTestingHandler = async (e: Event) => {
     for (const value of formData.values()) {
       testingStore.setAnswer(testingStore.questions[testingStore.currentQuestionIndex].id, Number(value));
     }
+
     uiStore.notify(true, NotifierMessages.CHECKING_ANSWERS);
     const results = await checkAnswers(userStore.user.id, testingStore.answers);
     await testingStore.setResults(results);
-    await router.push("/results");
+    await router.push("/main/results");
     uiStore.notify(false);
 
   } catch (error: any) {

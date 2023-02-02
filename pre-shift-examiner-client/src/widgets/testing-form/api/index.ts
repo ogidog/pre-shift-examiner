@@ -11,11 +11,12 @@ export const startTesting = async (settingId: IUser["settingId"]) => {
             }
         });
 
-    if (responseObject.questions) {
-        return responseObject.questions;
-    } else {
-        throw responseObject.error;
+    if (!responseObject.error) {
+        return responseObject;
     }
+
+    throw responseObject.error;
+
 }
 
 export const checkAnswers = async (userId: IUser["id"], answers: IAnswers) => {
@@ -23,6 +24,7 @@ export const checkAnswers = async (userId: IUser["id"], answers: IAnswers) => {
         API_CHECK_ANSWERS,
         {"user-id": userId, answers: answers}
     );
+
     if (responseObject.results) {
         return responseObject.results;
     } else {
