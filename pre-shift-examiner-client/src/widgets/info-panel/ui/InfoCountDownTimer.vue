@@ -10,14 +10,14 @@ let remainTime = ref(0);
 watch(() => testingStore.settings, (settings) => {
   if (settings.testDuration) {
     remainTime.value = testingStore.settings.testDuration;
-    countDownTimer = setInterval(() => {
-      remainTime.value--;
-
-      if (remainTime.value === 0) {
-        clearInterval(countDownTimer);
-        router.push("/main/results");
-      }
-    }, 1000);
+    // countDownTimer = setInterval(() => {
+    //   remainTime.value--;
+    //
+    //   if (remainTime.value === 0) {
+    //     clearInterval(countDownTimer);
+    //     router.push("/main/results");
+    //   }
+    // }, 1000);
   }
 });
 

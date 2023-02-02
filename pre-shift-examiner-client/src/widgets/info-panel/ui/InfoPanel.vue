@@ -11,9 +11,15 @@ import InfoCountDownTimer from "./InfoCountDownTimer.vue";
 </script>
 
 <style scoped>
+
 .c-info-panel {
   display: flex;
   justify-content: space-between;
+
+  position: sticky;
+  top: 0px;
+
+  background-color: white;
 
   width: 100%;
   height: fit-content;

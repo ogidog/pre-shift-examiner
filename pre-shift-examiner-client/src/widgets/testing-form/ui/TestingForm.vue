@@ -47,13 +47,11 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
 
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 
     width: 100%;
-    height: 100%;
 
-    border: 0px solid red;
   }
 }
 
