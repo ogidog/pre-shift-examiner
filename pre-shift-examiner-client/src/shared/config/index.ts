@@ -1,5 +1,5 @@
 const BASE_SERVER_URL = () => {
-    return "http://pre-shift-examiner-server.local"
+    return "http://172.16.1.117"
 }
 
 export const API_LOGIN = BASE_SERVER_URL() + "/api/auth/login";

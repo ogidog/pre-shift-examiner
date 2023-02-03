@@ -34,4 +34,15 @@ const router = createRouter({
     routes
 });
 
+router.beforeEach((to, from, next) => {
+    performance.getEntriesByType("navigation").forEach(async entries => {
+        if ((<PerformanceNavigationTiming>entries).type === "reload" && from.path !== to.path) {
+            next(false);
+            window.location.replace("/");
+        } else {
+            next()
+        }
+    });
+})
+
 export default router;

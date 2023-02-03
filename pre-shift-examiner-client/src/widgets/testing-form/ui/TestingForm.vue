@@ -2,8 +2,8 @@
   <NotifierA>
     <div class="c-testing">
       <form :id="testingStore.questions[testingStore.currentQuestionIndex].id">
-          <QuestionContainer :question="testingStore.questions[testingStore.currentQuestionIndex]"/>
-          <TestingControlButtonsContainer/>
+        <QuestionContainer :question="testingStore.questions[testingStore.currentQuestionIndex]"/>
+        <TestingControlButtonsContainer/>
       </form>
     </div>
   </NotifierA>
@@ -45,19 +45,7 @@ onMounted(async () => {
 .c-testing {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-  height: 100%;
-}
-
-.c-testing-form__div-content {
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
+  justify-content: flex-start;
 }
 
 </style>

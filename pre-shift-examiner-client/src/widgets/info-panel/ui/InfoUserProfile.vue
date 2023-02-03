@@ -6,7 +6,6 @@
 
 <script setup lang="ts">
 import {userStore} from "@/store";
-
 const {surname, name, patronymic} = userStore.user;
 
 </script>

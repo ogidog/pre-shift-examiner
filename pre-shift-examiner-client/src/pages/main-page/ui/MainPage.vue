@@ -19,7 +19,6 @@ import {InfoPanel} from "@/widgets/info-panel/ui";
 
     height: 100%;
     width: 100%;
-
   }
 }
 

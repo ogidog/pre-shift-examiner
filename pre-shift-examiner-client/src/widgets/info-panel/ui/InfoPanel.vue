@@ -8,6 +8,7 @@
 <script setup lang="ts">
 import UserProfile from "./InfoUserProfile.vue";
 import InfoCountDownTimer from "./InfoCountDownTimer.vue";
+
 </script>
 
 <style scoped>
