@@ -1,11 +1,11 @@
 <template>
   <NotifierA>
-    <form :id="testingStore.questions[testingStore.currentQuestionIndex].id">
-      <div class="c-testing-form">
-        <QuestionContainer :question="testingStore.questions[testingStore.currentQuestionIndex]"/>
-        <TestingControlButtonsContainer/>
-      </div>
-    </form>
+    <div class="c-testing">
+      <form :id="testingStore.questions[testingStore.currentQuestionIndex].id">
+          <QuestionContainer :question="testingStore.questions[testingStore.currentQuestionIndex]"/>
+          <TestingControlButtonsContainer/>
+      </form>
+    </div>
   </NotifierA>
 </template>
 
@@ -42,37 +42,22 @@ onMounted(async () => {
 
 <style scoped>
 
-@media (max-width: 1024px) {
-  .c-testing-form {
-    display: flex;
-    flex-direction: column;
+.c-testing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-
-  }
+  height: 100%;
 }
 
-@media (min-width: 1025px) {
-  .c-testing-form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+.c-testing-form__div-content {
+  display: flex;
+  flex-direction: column;
 
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    justify-content: center;
-    align-items: center;
-
-    width: 1025px;
-    height: fit-content;
-
-    border: 0px solid red;
-  }
+  width: 100%;
 }
 
 </style>

@@ -31,7 +31,6 @@ const score = computed(() => {
   font-size: 2.7em;
 }
 
-
 .score-container__span--color-incorrect {
   color: rgb(224, 65, 65);
 }
@@ -39,4 +38,5 @@ const score = computed(() => {
 .score-container__span {
   color: darkseagreen;
 }
+
 </style>

@@ -18,7 +18,7 @@ import TestingFinishButton from "./TestingFinishButton"
   display: flex;
   justify-content: center;
 
-  width: 95%;
+  width: 100%;
 }
 
 </style>

@@ -1,9 +1,7 @@
 <template>
   <div class="c-main">
     <InfoPanel/>
-    <div class="c-router-view">
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -12,23 +10,18 @@ import {InfoPanel} from "@/widgets/info-panel/ui";
 </script>
 
 <style scoped>
-/*.c-main {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  justify-content: flex-start;*/
 
-/*  height: 100%;*/
-/*  width: 100%;*/
-/*}*/
+@media (max-width: 1024px) {
+  .c-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 
-/*.c-router-view {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  justify-content: flex-start;*/
+    height: 100%;
+    width: 100%;
 
-/*  height: 100%;*/
-/*  width: 100%;*/
-/*}*/
+  }
+}
 
 @media (min-width: 1025px) {
   .c-main {
@@ -42,20 +35,12 @@ import {InfoPanel} from "@/widgets/info-panel/ui";
     flex-direction: column;
 
     justify-content: flex-start;
-    align-items: start;
+    align-items: center;
 
     width: 1025px;
-    height: fit-content;
+    height: 768px;
   }
 
-  .c-router-view {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    height: 100%;
-    width: 100%;
-  }
 }
 
 </style>

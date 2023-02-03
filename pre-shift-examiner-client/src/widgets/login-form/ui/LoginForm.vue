@@ -1,6 +1,6 @@
 <template>
   <NotifierA>
-    <div class="c-login-form">
+    <div class="c-login">
       <LoginPersonnelIdInput/>
       <LoginStartTestButton/>
     </div>
@@ -16,40 +16,13 @@ import LoginStartTestButton from "./LoginStartTestingButton.vue";
 </script>
 
 <style scoped>
+.c-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-@media (max-width: 1024px) {
-  .c-login-form {
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    height: 100%;
-
-    border: 0px solid red;
-  }
+  width: 100%;
+  height: 100%;
 }
-
-@media (min-width: 1025px) {
-  .c-login-form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    width: 1025px;
-    height: fit-content;
-
-    border: 0px solid red;
-  }
-}
-
 </style>

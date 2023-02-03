@@ -19,7 +19,7 @@ const props = defineProps({question: {} as PropType<IQuestion | undefined>});
 </script>
 
 <style scoped>
-@media (max-width: 1024px) {
+
   .c-question {
     display: flex;
     flex-direction: column;
@@ -28,27 +28,5 @@ const props = defineProps({question: {} as PropType<IQuestion | undefined>});
     align-items: center;
 
     width: 100%;
-    height: fit-content;
   }
-}
-
-@media (min-width: 1025px) {
-  .c-question {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-
-    justify-content: flex-start;
-    align-items: center;
-
-    width: 1025px;
-    height: fit-content;
-
-    border: 0px solid red;
-  }
-}
 </style>
