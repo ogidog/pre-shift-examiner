@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
   <div class="c-personnel-id">
     <input class="personnel-id-container__input" type="text" v-model="userStore.user.personnelId" autofocus/>
@@ -7,7 +8,6 @@
 
 <script setup lang="ts">
 import {userStore} from "@/store";
-
 </script>
 
 <style scoped>

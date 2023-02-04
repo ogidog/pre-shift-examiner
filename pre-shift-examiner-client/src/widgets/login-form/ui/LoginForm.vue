@@ -3,6 +3,7 @@
     <div class="c-login">
       <LoginPersonnelIdInput/>
       <LoginStartTestButton/>
+      <div class="c-login__div-keyboard">This is a mobile device</div>
     </div>
   </NotifierA>
 
@@ -25,4 +26,11 @@ import LoginStartTestButton from "./LoginStartTestingButton.vue";
   width: 100%;
   height: 100%;
 }
+
+@media (max-resolution: 1dppx) {
+  .c-login__div-keyboard {
+    display: none;
+  }
+}
+
 </style>
