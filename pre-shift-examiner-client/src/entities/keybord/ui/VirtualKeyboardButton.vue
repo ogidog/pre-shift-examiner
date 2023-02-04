@@ -1,6 +1,9 @@
 <template>
-  <div class="c-button">
-    {{ String.fromCharCode(props.charCode) }}
+  <div v-if="props.charCode === 8" class="c-button c-button_enter">
+    &#129056;
+  </div>
+  <div class="c-button" v-else>
+    {{ String.fromCharCode(props.charCode).toUpperCase() }}
   </div>
 </template>
 
@@ -24,11 +27,18 @@ const props = defineProps({charCode: {type: Number, required: true}});
   text-align: center;
   line-height: 40px;
 
-  font-family: Days;
-  color: #b2b0b0;
+  font-family: PTC55F;
+  font-size: 1.3em;
+  color: #030303;
 
   background-color: white;
   border-radius: 2px;
   border: 1px solid gray;
+}
+
+.c-button_enter {
+  font-weight: bold;
+  background-color: #5488f1;
+  color: white;
 }
 </style>

@@ -14,7 +14,7 @@ import {defineProps, PropType} from "vue";
 import QuestionOption from "./QuestionOption.vue";
 import QuestionText from "./QuestionText.vue";
 
-const props = defineProps({question: {type: {} as PropType<IQuestion | undefined>, required: true}});
+const props = defineProps({question: {} as PropType<IQuestion | undefined>});
 
 </script>
 
