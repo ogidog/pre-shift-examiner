@@ -8,5 +8,4 @@ export async function login(req: Request, res: Response) {
     let responseObject:IResponseObject = await LoginService.login(personnelId);
 
     res.status(responseObject.httpStatusCode).send(responseObject);
-
 }

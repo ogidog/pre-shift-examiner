@@ -1,9 +1,8 @@
-import axios from "axios";
 import {IResponseObject, IUser, IAnswers} from "pre-shift-examiner-types";
-import {API_GET_QUESTIONS, API_CHECK_ANSWERS} from "@/shared/config"
+import {axiosInstance, API_GET_QUESTIONS, API_CHECK_ANSWERS} from "@/shared/config"
 
 export const startTesting = async (settingId: IUser["settingId"]) => {
-    const responseObject: IResponseObject = await axios.get(
+    const responseObject: IResponseObject = await axiosInstance.get(
         API_GET_QUESTIONS,
         {
             params: {
@@ -20,7 +19,7 @@ export const startTesting = async (settingId: IUser["settingId"]) => {
 }
 
 export const checkAnswers = async (userId: IUser["id"], answers: IAnswers) => {
-    const responseObject: IResponseObject = await axios.post(
+    const responseObject: IResponseObject = await axiosInstance.post(
         API_CHECK_ANSWERS,
         {"user-id": userId, answers: answers}
     );

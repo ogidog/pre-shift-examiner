@@ -1,7 +1,22 @@
-const BASE_SERVER_URL = () => {
-    return "http://172.16.1.117"
-}
+import axios from "axios";
+import {ErrorMessages} from "pre-shift-examiner-types"
 
-export const API_LOGIN = BASE_SERVER_URL() + "/api/auth/login";
-export const API_GET_QUESTIONS = BASE_SERVER_URL() + "/api/testing/questions";
-export const API_CHECK_ANSWERS = BASE_SERVER_URL() + "/api/testing/check-answers"
+const BASE_SERVER_URL = "http://localhost"
+
+export const API_LOGIN = "/api/auth/login";
+export const API_GET_QUESTIONS = "/api/testing/questions";
+export const API_CHECK_ANSWERS =  "/api/testing/check-answers"
+
+export const axiosInstance = axios.create({
+    withCredentials: true,
+    baseURL: BASE_SERVER_URL
+})
+axiosInstance.interceptors.response.use(function (response) {
+    return response.data;
+
+}, function (error) {
+    if(error.code === "ERR_NETWORK"){
+        throw ({message: ErrorMessages.SERVER_ERROR});
+    }
+    return error.response.data;
+});
