@@ -8,6 +8,10 @@ export const userStore = reactive({
         this.user = user;
     },
 
+    setPersonnelId(personnelId: IUser["personnelId"]) {
+        this.user.personnelId = personnelId;
+    },
+
     async setDefaultState() {
         this.user = <IUser>{};
     },
