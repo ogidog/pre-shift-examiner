@@ -32,9 +32,8 @@ const router = createRouter({
     routes
 });
 router.beforeEach((to, from, next) => {
-    performance.getEntriesByType("navigation").forEach(async (entries) => {
+    performance.getEntriesByType("navigation").forEach(entries => {
         if (entries.type === "reload" && from.path === "/") {
-            history.pushState({}, "", "/");
             next(false);
             window.location.replace("/");
         }

@@ -2,8 +2,8 @@
   <NotifierA>
     <div class="c-login">
       <LoginPersonnelIdInput/>
+      <VirtualKeyboard/>
       <LoginStartTestButton/>
-      <div class="c-login__div-keyboard">This is a mobile device</div>
     </div>
   </NotifierA>
 
@@ -13,6 +13,7 @@
 import {NotifierA} from "@/shared/ui/notifier-a";
 import LoginPersonnelIdInput from "./LoginPersonnelIdInput.vue";
 import LoginStartTestButton from "./LoginStartTestingButton.vue";
+import {VirtualKeyboard} from "@/entities/keybord/ui";
 
 </script>
 
@@ -25,12 +26,6 @@ import LoginStartTestButton from "./LoginStartTestingButton.vue";
 
   width: 100%;
   height: 100%;
-}
-
-@media (max-resolution: 1dppx) {
-  .c-login__div-keyboard {
-    display: none;
-  }
 }
 
 </style>

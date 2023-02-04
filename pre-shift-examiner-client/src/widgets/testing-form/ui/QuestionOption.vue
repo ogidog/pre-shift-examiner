@@ -12,7 +12,10 @@ import {IOption} from "pre-shift-examiner-types/index";
 import {defineProps, PropType} from "vue";
 import {testingStore} from "@/store";
 
-const props = defineProps({option: {} as PropType<IOption>, type: {} as PropType<'checkbox' | 'radio'>});
+const props = defineProps({
+  option: {type: {} as PropType<IOption>, required: true},
+  type: {type: {} as PropType<'checkbox' | 'radio'>, required: true}
+});
 
 </script>
 

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import {defineProps} from 'vue';
 
-const props = defineProps({text: String});
+const props = defineProps({text: {type: String, required: true}});
 
 </script>
 
 <template>
-  <button>{{props.text}}</button>
+  <button>{{ props.text }}</button>
 </template>
 
 <style scoped>
