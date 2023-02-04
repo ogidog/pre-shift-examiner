@@ -16,8 +16,6 @@ import {userStore} from "@/store";
   display: flex;
   justify-content: center;
 
-  margin: 5px;
-
   position: relative;
 
   width: fit-content;
