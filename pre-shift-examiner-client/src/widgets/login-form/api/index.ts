@@ -1,9 +1,10 @@
 import {IResponseObject} from "pre-shift-examiner-types/index";
 import {userStore} from "@/store";
-import {axiosInstance, API_LOGIN} from "@/shared/config";
+import {axiosInstance} from "@/shared/config";
 
 export const login = async () => {
-    const responseObject: IResponseObject = await axiosInstance.get(API_LOGIN, {
+    const responseObject: IResponseObject = await axiosInstance.get(
+        process.env.API_LOGIN, {
         params: {
             "personnel-id": userStore.user.personnelId
         }

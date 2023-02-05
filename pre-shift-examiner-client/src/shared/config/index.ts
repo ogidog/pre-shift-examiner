@@ -1,9 +1,9 @@
 import axios from "axios";
 import {ErrorMessages} from "pre-shift-examiner-types";
 
-const BASE_SERVER_URL = "http://localhost";
-
-console.log(process.env)
+if(process.env.NODE_ENV === "production"){
+    process.env["SERVER_API"] = "https://pre-shift-examiner-api.onrender.com";
+}
 
 // export const API_LOGIN = "/api/auth/login";
 // export const API_GET_QUESTIONS = "/api/testing/questions";
@@ -11,7 +11,7 @@ console.log(process.env)
 
 export const axiosInstance = axios.create({
     withCredentials: true,
-    baseURL: BASE_SERVER_URL
+    baseURL: process.env["SERVER_API"]
 });
 
 axiosInstance.interceptors.response.use(function (response) {
