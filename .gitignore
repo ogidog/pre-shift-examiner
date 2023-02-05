@@ -8,3 +8,6 @@
 /pre-shift-examiner-client/.env
 /pre-shift-examiner-types.iml
 /pre-shift-examiner-types/pre-shift-examiner-types.iml
+/pre-shift-examiner-middleware/dist/
+/pre-shift-examiner-types/node_modules/
+/pre-shift-examiner-types/package-lock.json
