@@ -3,7 +3,7 @@ import {axiosInstance} from "@/shared/config";
 
 export const startTesting = async (settingId: IUser["settingId"]) => {
     const responseObject: IResponseObject = await axiosInstance.get(
-        process.env.API_GET_QUESTIONS,
+        process.env.VUE_APP_API_GET_QUESTIONS,
         {
             params: {
                 "setting-id": settingId
@@ -20,7 +20,7 @@ export const startTesting = async (settingId: IUser["settingId"]) => {
 
 export const checkAnswers = async (userId: IUser["id"], answers: IAnswers) => {
     const responseObject: IResponseObject = await axiosInstance.post(
-        process.env.API_CHECK_ANSWERS,
+        process.env.VUE_APP_API_CHECK_ANSWERS,
         {"user-id": userId, answers: answers}
     );
 

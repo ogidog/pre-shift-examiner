@@ -4,7 +4,7 @@ import {axiosInstance} from "@/shared/config";
 
 export const login = async () => {
     const responseObject: IResponseObject = await axiosInstance.get(
-        process.env.API_LOGIN, {
+        process.env.VUE_APP_API_LOGIN, {
         params: {
             "personnel-id": userStore.user.personnelId
         }
