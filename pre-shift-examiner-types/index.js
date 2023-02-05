@@ -4,6 +4,7 @@ exports.NotifierMessages = exports.ErrorMessages = void 0;
 exports.ErrorMessages = {
     PERSONNEL_ID_ERROR: "Неправильный табельный номер",
     SERVER_ERROR: "Ошибка сервера",
+    AUTH_ERROR: "Ошибка аутентификации",
 };
 exports.NotifierMessages = {
     AUTHENTICATION: "Аутентификация...",
