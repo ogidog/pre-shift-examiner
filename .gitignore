@@ -12,3 +12,7 @@
 /pre-shift-examiner-types/node_modules/
 /pre-shift-examiner-types/package-lock.json
 /pre-shift-examiner-middleware/package-lock.json
+/pre-shift-examiner-middleware/.env.development.local
+/pre-shift-examiner-middleware/.env.production.local
+/pre-shift-examiner-middleware/.env.dev
+/pre-shift-examiner-middleware/.env.production

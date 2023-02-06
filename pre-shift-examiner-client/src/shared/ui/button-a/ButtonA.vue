@@ -11,18 +11,18 @@ const props = defineProps({text: String});
 
 <style scoped>
 button {
-  background-color: #5488f1;
-  border-radius: 8px;
+  background-color: rgba(84, 136, 241, 0.97);
+  border-radius: 2px;
   border-width: 0;
   color: rgb(255, 255, 255);
   cursor: pointer;
-  display: inline-block;
+
   font-family: "PTC55F";
   font-weight: bold;
-  font-size: 1.1em;
-  line-height: 20px;
+  font-size: 1.2em;
+  line-height: 30px;
   list-style: none;
-  padding: 10px 12px;
+  padding: 10px 10px;
   text-align: center;
   vertical-align: baseline;
   white-space: nowrap;

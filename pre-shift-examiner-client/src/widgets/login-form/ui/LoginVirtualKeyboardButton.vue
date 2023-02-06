@@ -26,16 +26,14 @@ const charClickHandler = () => {
 
 <style scoped>
 .c-button {
-  width: fit-content;
-  height: fit-content;
 
   margin: 3px;
 
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
 
   text-align: center;
-  line-height: 40px;
+  line-height: 45px;
 
   font-family: PTC55F;
   font-size: 1.3em;

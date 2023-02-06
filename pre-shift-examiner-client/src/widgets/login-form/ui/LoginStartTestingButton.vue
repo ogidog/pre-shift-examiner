@@ -1,5 +1,7 @@
 <template>
-  <ButtonA text="Начать тестирование" @click="onClick"></ButtonA>
+  <div class="c-login-start-button">
+    <ButtonA text="Начать тестирование" @click="onClick"></ButtonA>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -22,3 +24,9 @@ const onClick = async () => {
 }
 
 </script>
+<style scoped>
+
+.c-login-start-button {
+  margin-top: 20px;
+}
+</style>

@@ -19,6 +19,7 @@ import {userStore} from "@/store";
   position: relative;
 
   width: fit-content;
+  margin-right: 10px;
 }
 
 .personnel-id-container__label {

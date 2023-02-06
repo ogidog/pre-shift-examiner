@@ -1,5 +1,5 @@
-import {testingStore} from "@/store/testingStore";
-import {userStore} from "@/store/userStore";
-import {uiStore} from "@/store/uiStore";
+import {testingStore} from "./testingStore";
+import {userStore} from "./userStore";
+import {uiStore} from "./uiStore";
 
 export {testingStore, userStore, uiStore}

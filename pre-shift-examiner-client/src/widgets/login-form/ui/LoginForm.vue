@@ -1,8 +1,11 @@
 <template>
   <NotifierA>
     <div class="c-login">
-      <LoginPersonnelIdInput/>
-      <VirtualKeyboard/>
+      <div class="c-login__input-controls">
+        <LoginPersonnelIdInput/>
+        <LoginShowVirtualKeyboardButton/>
+      </div>
+      <LoginVirtualKeyboard/>
       <LoginStartTestButton/>
     </div>
   </NotifierA>
@@ -13,7 +16,8 @@
 import {NotifierA} from "@/shared/ui/notifier-a";
 import LoginPersonnelIdInput from "./LoginPersonnelIdInput.vue";
 import LoginStartTestButton from "./LoginStartTestingButton.vue";
-import {VirtualKeyboard} from "@/entities/keybord/ui";
+import LoginShowVirtualKeyboardButton from "./LoginShowVirtualKeyboardButton.vue"
+import LoginVirtualKeyboard from "./LoginVirtualKeyboard.vue";
 
 </script>
 
@@ -26,6 +30,12 @@ import {VirtualKeyboard} from "@/entities/keybord/ui";
 
   width: 100%;
   height: 100%;
+}
+
+.c-login__input-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>

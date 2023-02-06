@@ -1,11 +1,12 @@
 <template>
-  <div class="c-keyboard">
-    <VirtualKeyboardButtonLine v-for="(charCodes, key) in charLineCodes" :char-codes="charCodes" :key="key"/>
+  <div class="c-keyboard" v-if="uiStore.virtualKeyBoardVisible">
+    <LoginVirtualKeyboardButtonLine v-for="(charCodes, key) in charLineCodes" :char-codes="charCodes" :key="key"/>
   </div>
 </template>
 
 <script setup lang="ts">
-import VirtualKeyboardButtonLine from "./VirtualKeyboardButtonLine.vue";
+import LoginVirtualKeyboardButtonLine from "./LoginVirtualKeyboardButtonLine.vue";
+import {uiStore} from "@/store/uiStore";
 
 const charLineCodes = [
   [49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 8],
@@ -32,7 +33,6 @@ const charLineCodes = [
     display: block;
 
     margin-top: 20px;
-    margin-bottom: 20px;
   }
 }
 </style>

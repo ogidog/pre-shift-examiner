@@ -1,7 +1,7 @@
 import express, {Express} from "express";
-import {initConfig} from "./shared/config"
+import {config} from "./shared/config"
 
-initConfig();
+config();
 
 const app: Express = express();
 const port: string = process.env.PORT || '3000';
