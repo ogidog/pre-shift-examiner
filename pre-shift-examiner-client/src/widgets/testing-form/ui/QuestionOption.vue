@@ -1,8 +1,8 @@
 <template>
   <div class="c-option">
-    <input :id="this.$props.option.id" :type="this.$props.type" :value="this.$props.option.id" name="option"/>
-    <label :for="this.$props.option.id">
-      {{ this.$props.option.content }}
+    <input :id="props.option.id" :type="props.type" :value="props.option.id" name="option"/>
+    <label :for="props.option.id">
+      {{ props.option.content }}
     </label>
   </div>
 </template>
