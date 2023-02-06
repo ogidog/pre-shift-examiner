@@ -12,19 +12,26 @@ const clickHandler = () => {
 
 <style scoped>
 .c-button {
+  display: none;
+}
 
-  width: 40px;
-  height: 40px;
+@media (max-resolution: 1dppx) {
+  .c-button {
+    display: block;
 
-  background: url("@/assets/images/keyboard-1385.png") center/100% no-repeat;
-  background-origin: content-box;
-  background-color: white;
+    width: 40px;
+    height: 40px;
 
-  border-radius: 2px;
-  border: 1px solid #bdbdbd;
+    background: url("@/assets/images/keyboard-1385.png") center/100% no-repeat;
+    background-origin: content-box;
+    background-color: white;
 
-  padding: 5px;
+    border-radius: 2px;
+    border: 1px solid #bdbdbd;
 
-  cursor: pointer;
+    padding: 5px;
+
+    cursor: pointer;
+  }
 }
 </style>
