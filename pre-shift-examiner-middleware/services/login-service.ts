@@ -16,7 +16,7 @@ class LoginService {
                                     work.users.setting_id
                              FROM work.users
                              WHERE work.users.personnel_id = $1`;
-            let queryValues = ['НИ00-0011']; //[personnelId];
+            let queryValues = process.env.NODE_ENV==='development'? [process.env.PERSONNEL_ID]: [personnelId];
             let queryResultRows: QueryResultRow[] = (await pool.query(queryText, queryValues)).rows;
 
             if (queryResultRows.length != 1) return {

@@ -11,7 +11,6 @@ export const uiStore = reactive({
     setVirtualKeyBoardVisible() {
         this.virtualKeyBoardVisible = !this.virtualKeyBoardVisible;
         localStorage.virtualKeyBoardVisible = this.virtualKeyBoardVisible;
-        console.log(localStorage)
     },
 
     setDefaultState() {
