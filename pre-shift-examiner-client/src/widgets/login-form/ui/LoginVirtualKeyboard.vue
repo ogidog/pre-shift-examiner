@@ -1,5 +1,5 @@
 <template>
-  <div class="c-keyboard" v-if="uiStore.virtualKeyBoardVisible">
+  <div class="c-keyboard" v-show="uiStore.virtualKeyBoardVisible">
     <LoginVirtualKeyboardButtonLine v-for="(charCodes, key) in charLineCodes" :char-codes="charCodes" :key="key"/>
   </div>
 </template>
@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import LoginVirtualKeyboardButtonLine from "./LoginVirtualKeyboardButtonLine.vue";
 import {uiStore} from "@/store/uiStore";
+import {onMounted} from "vue";
 
 const charLineCodes = [
   [49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 8],
@@ -29,8 +30,6 @@ const charLineCodes = [
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    display: block;
 
     margin-top: 20px;
   }

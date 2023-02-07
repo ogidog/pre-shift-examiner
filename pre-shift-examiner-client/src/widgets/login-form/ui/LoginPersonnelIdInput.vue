@@ -1,13 +1,15 @@
 <!--suppress ALL -->
 <template>
   <div class="c-personnel-id">
-    <input class="personnel-id-container__input" type="text" v-model="userStore.user.personnelId" autofocus/>
+    <input class="personnel-id-container__input" type="text" v-model="userStore.user.personnelId" v-uppercase autofocus/>
     <label class="personnel-id-container__label">Введите табельный номер:</label>
   </div>
 </template>
 
 <script setup lang="ts">
 import {userStore} from "@/store";
+import {computed} from "vue";
+
 </script>
 
 <style scoped>

@@ -32,6 +32,7 @@ const clickHandler = () => {
     padding: 5px;
 
     cursor: pointer;
+
   }
 }
 </style>
