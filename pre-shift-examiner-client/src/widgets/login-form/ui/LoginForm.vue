@@ -18,7 +18,6 @@ import LoginPersonnelIdInput from "./LoginPersonnelIdInput.vue";
 import LoginStartTestButton from "./LoginStartTestingButton.vue";
 import LoginShowVirtualKeyboardButton from "./LoginShowVirtualKeyboardButton.vue"
 import LoginVirtualKeyboard from "./LoginVirtualKeyboard.vue";
-
 </script>
 
 <style scoped>

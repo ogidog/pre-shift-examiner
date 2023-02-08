@@ -13,6 +13,11 @@ export const uiStore = reactive({
         localStorage.virtualKeyBoardVisible = this.virtualKeyBoardVisible;
     },
 
+    keyDownCode: {} as Number,
+    setKeyDownCode(keyDownCode: Number) {
+        this.keyDownCode = keyDownCode;
+    },
+
     setDefaultState() {
         this.notifier = <INotifier>{}
     }

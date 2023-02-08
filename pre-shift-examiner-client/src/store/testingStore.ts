@@ -2,30 +2,31 @@ import {reactive} from 'vue'
 import {IQuestion, IAnswers, IOption, IResult, ISettings} from "pre-shift-examiner-types/index";
 
 export const testingStore = reactive({
-    questions: <IQuestion[]>[],
-    currentQuestionIndex: 0,
-    answers: <IAnswers>{},
-    results: <IResult[]>[],
     settings: <ISettings>{},
-
     setSettings(settings: ISettings) {
         this.settings = settings;
     },
 
+    questions: <IQuestion[]>[],
+    currentQuestionIndex: 0,
     setQuestions(questions: IQuestion[]) {
         this.questions = questions;
     },
+    nextQuestion() {
+        this.currentQuestionIndex++;
+    },
 
+    answers: <IAnswers>{},
+    setAnswer(questionId: IQuestion["id"], optionId: IOption["id"]) {
+        this.answers[questionId].push(optionId);
+    },
     initAnswers() {
         const answers: IAnswers = {};
         this.questions.forEach(question => answers[question.id] = []);
         this.answers = answers;
     },
 
-    setAnswer(questionId: IQuestion["id"], optionId: IOption["id"]) {
-        this.answers[questionId].push(optionId);
-    },
-
+    results: <IResult[]>[],
     setResults(results: IResult[]) {
         this.results = results;
     },

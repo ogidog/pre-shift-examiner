@@ -4,6 +4,20 @@
   </div>
 </template>
 
+<script setup lang="ts">
+import {onMounted} from "vue";
+import {uiStore} from "@/store";
+
+onMounted(() => {
+  window.addEventListener(
+      "keydown",
+      (e: KeyboardEvent) => {
+        if (e.key === "Enter") uiStore.setKeyDownCode(new Number(e.code));
+      }, true);
+})
+
+</script>
+
 <style>
 
 @font-face {
@@ -27,6 +41,7 @@
 body {
   margin: 0;
 }
+
 .c-app {
   width: 100vw;
   height: 100vh;

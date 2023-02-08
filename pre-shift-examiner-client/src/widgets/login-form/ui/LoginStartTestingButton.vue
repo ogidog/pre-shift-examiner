@@ -1,23 +1,30 @@
 <template>
   <div class="c-login-start-button">
-    <ButtonA text="Начать тестирование" @click="onClick"></ButtonA>
+    <ButtonA text="Начать тестирование" @click="clickHandler"></ButtonA>
   </div>
 </template>
 
 <script setup lang="ts">
+
 import {login} from "../api";
 import {ButtonA} from "@/shared/ui/button-a";
 import {uiStore, userStore} from "@/store";
 import router from "@/router/router";
 import {NotifierMessages, INotifier} from "pre-shift-examiner-types"
+import {watch} from "vue";
+import {userValidator} from "@/widgets/login-form/validators";
 
-const onClick = async () => {
+watch(() => uiStore.keyDownCode, () => clickHandler())
+
+const clickHandler = async () => {
   try {
-    uiStore.notify(true, NotifierMessages.AUTHENTICATION);
-    const user = await login();
-    userStore.setUser(user);
-    await router.push({path: "/main/testing"});
+    if (await userValidator.value.$validate()) {
+      uiStore.notify(true, NotifierMessages.AUTHENTICATION);
+      const user = await login();
+      userStore.setUser(user);
+      await router.push({path: "/main/testing"});
 
+    }
   } catch (error: any) {
     uiStore.notify(true, error.message, error as INotifier["error"]);
   }

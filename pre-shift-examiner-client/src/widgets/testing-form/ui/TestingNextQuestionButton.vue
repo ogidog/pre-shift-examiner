@@ -16,7 +16,7 @@ const nextQuestionHandler = (e: Event) => {
     testingStore.setAnswer(testingStore.questions[testingStore.currentQuestionIndex].id, Number(value));
   }
 
-  testingStore.currentQuestionIndex++
+  testingStore.nextQuestion()
 }
 
 </script>
