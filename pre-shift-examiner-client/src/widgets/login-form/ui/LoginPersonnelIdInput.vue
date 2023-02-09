@@ -1,13 +1,17 @@
 <template>
   <div class="c-personnel-id">
-    <input class="personnel-id-container__input" type="text" v-model="userStore.user.personnelId" v-uppercase
-           autofocus/>
-    <label class="personnel-id-container__label">Введите табельный номер:</label>
+    <input class="c-personnel-id__input" type="text" v-model="userStore.user.personnelId" v-uppercase
+           autofocus maxlength="16" />
+    <label v-if="userValidator.$error"
+           class="c-personnel-id__label c-personnel-id__label_error">{{ userValidator.user.personnelId.$errors[0].$message }}</label>
+    <label v-else class="c-personnel-id__label">Введите табельный номер:</label>
   </div>
 </template>
 
 <script setup lang="ts">
 import {userStore} from "@/store";
+import {userValidator} from "@/widgets/login-form/validators";
+
 </script>
 
 <style scoped>
@@ -22,7 +26,7 @@ import {userStore} from "@/store";
   margin-right: 10px;
 }
 
-.personnel-id-container__label {
+.c-personnel-id__label {
   position: absolute;
   top: 5px;
   left: 10px;
@@ -34,7 +38,11 @@ import {userStore} from "@/store";
   font-weight: bold;
 }
 
-.personnel-id-container__input {
+.c-personnel-id__label_error{
+  color: red;
+}
+
+.c-personnel-id__input {
 
   width: 310px;
   height: 35px;
@@ -52,7 +60,7 @@ import {userStore} from "@/store";
   font-size: 1.2em;
 }
 
-.personnel-id-container__input:focus {
+.c-personnel-id__input:focus {
   border-color: #bdbdbd;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
