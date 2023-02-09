@@ -1,11 +1,11 @@
 <template>
   <div class="c-score">
     <span
-        :class="score === testingStore.questions.length?'score-container__span':'score-container__span--color-incorrect'">
+        :class="score === testingStore.questions.length ? 'c-score__span': 'c-score__span_incorrect'">
       {{ score || 0 }}
     </span>
     /
-    <span class="score-container__span">{{ testingStore.questions.length }}</span>
+    <span class="c-score__span">{{ testingStore.questions.length }}</span>
   </div>
 </template>
 
@@ -31,11 +31,11 @@ const score = computed(() => {
   font-size: 2.7em;
 }
 
-.score-container__span--color-incorrect {
+.c-score__span_incorrect {
   color: rgb(224, 65, 65);
 }
 
-.score-container__span {
+.c-score__span {
   color: darkseagreen;
 }
 

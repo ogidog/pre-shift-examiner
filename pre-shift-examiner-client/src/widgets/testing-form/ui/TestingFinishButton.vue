@@ -30,7 +30,6 @@ const finishTestingHandler = async (e: Event) => {
     uiStore.notify(true, error.message, error as INotifier["error"]);
     await router.push({path: "/"});
   }
-
 }
 
 </script>

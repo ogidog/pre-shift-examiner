@@ -1,4 +1,4 @@
-import {helpers, maxLength, minLength, required} from "@vuelidate/validators";
+import {helpers, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import {userStore} from "@/store";
 

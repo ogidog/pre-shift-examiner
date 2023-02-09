@@ -1,9 +1,11 @@
 <template>
   <div class="c-personnel-id">
     <input class="c-personnel-id__input" type="text" v-model="userStore.user.personnelId" v-uppercase
-           autofocus maxlength="16" />
+           autofocus maxlength="16"/>
     <label v-if="userValidator.$error"
-           class="c-personnel-id__label c-personnel-id__label_error">{{ userValidator.user.personnelId.$errors[0].$message }}</label>
+           class="c-personnel-id__label c-personnel-id__label_error">{{
+        userValidator.user.personnelId.$errors[0].$message
+      }}</label>
     <label v-else class="c-personnel-id__label">Введите табельный номер:</label>
   </div>
 </template>
@@ -11,6 +13,9 @@
 <script setup lang="ts">
 import {userStore} from "@/store";
 import {userValidator} from "@/widgets/login-form/validators";
+import {onMounted, onUnmounted} from "vue";
+
+onUnmounted(() => userValidator.value.$reset())
 
 </script>
 
@@ -38,7 +43,7 @@ import {userValidator} from "@/widgets/login-form/validators";
   font-weight: bold;
 }
 
-.c-personnel-id__label_error{
+.c-personnel-id__label_error {
   color: red;
 }
 
