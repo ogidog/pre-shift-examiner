@@ -7,7 +7,7 @@ export const uiStore = reactive({
         this.notifier = {visible: visible, message: message, error: error};
     },
 
-    virtualKeyBoardVisible: JSON.parse(localStorage.virtualKeyBoardVisible),
+    virtualKeyBoardVisible: JSON.parse(localStorage.virtualKeyBoardVisible || false),
     setVirtualKeyBoardVisible() {
         this.virtualKeyBoardVisible = !this.virtualKeyBoardVisible;
         localStorage.virtualKeyBoardVisible = this.virtualKeyBoardVisible;
