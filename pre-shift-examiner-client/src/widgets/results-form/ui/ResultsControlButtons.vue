@@ -8,6 +8,9 @@
 import {ButtonA} from "@/shared/ui/button-a";
 import router from "@/router/router";
 import {testingStore, uiStore, userStore} from "@/store";
+import {onMounted, onUnmounted} from "vue";
+
+let timeoutId: number;
 
 const closeHandler = async () => {
   await router.push("/");
@@ -15,6 +18,9 @@ const closeHandler = async () => {
   await userStore.setDefaultState();
   await uiStore.setDefaultState();
 }
+
+onMounted(() => timeoutId = setTimeout(() => closeHandler(), 10000));
+onUnmounted(() => clearTimeout(timeoutId))
 
 </script>
 
