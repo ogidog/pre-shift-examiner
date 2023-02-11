@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import TestingService from "../services/testing-service";
+import {TestingService} from "../services/testing-service";
 import {IResponseObject, IAnswers, IUser} from "pre-shift-examiner-types";
 
 export async function getQuestions(req: Request, res: Response) {

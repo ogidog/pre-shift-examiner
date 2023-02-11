@@ -20,7 +20,9 @@ export interface IResponseObject {
 
 export interface ISettings {
     testDuration: number,
-    resultDisplayType: 'short' | 'detail'
+    resultDisplayType: 'short' | 'detail',
+    category_ids_per_test?: number[],
+    number_of_questions_per_test?: number,
 }
 
 export interface IQuestion {

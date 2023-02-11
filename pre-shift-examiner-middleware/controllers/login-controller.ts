@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import LoginService from "../services/login-service";
+import {LoginService} from "../services/login-service";
 import {IResponseObject, IUser} from "pre-shift-examiner-types"
 
 export async function login(req: Request, res: Response) {

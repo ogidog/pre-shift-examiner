@@ -1,6 +1,7 @@
 import {QueryResultRow} from "pg";
-import pool from "./db-services";
+import pool from "../../shared/services/db-services";
 import {IResponseObject, IUser, ErrorMessages} from "pre-shift-examiner-types";
+import {QC_SELECT_PERSONNEL_ID_SQL} from "./login-service-sql";
 
 class LoginService {
 
@@ -8,16 +9,7 @@ class LoginService {
         const responseObject: IResponseObject = {httpStatusCode: 500};
 
         try {
-            let queryText = `SELECT work.users.id,
-                                    work.users.personnel_id,
-                                    work.users.surname,
-                                    work.users.name,
-                                    work.users.patronymic,
-                                    work.users.setting_id
-                             FROM work.users
-                             WHERE work.users.personnel_id = $1`;
-            let queryValues = process.env.NODE_ENV==='development'? [process.env.PERSONNEL_ID]: [personnelId];
-            let queryResultRows: QueryResultRow[] = (await pool.query(queryText, queryValues)).rows;
+            let queryResultRows: QueryResultRow[] = (await pool.query(QC_SELECT_PERSONNEL_ID_SQL(personnelId))).rows;
 
             if (queryResultRows.length != 1) return {
                 ...responseObject,
