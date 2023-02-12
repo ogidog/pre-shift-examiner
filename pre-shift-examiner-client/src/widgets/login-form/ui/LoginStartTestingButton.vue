@@ -23,10 +23,9 @@ const clickHandler = async () => {
       const user = await login();
       userStore.setUser(user);
       await router.push({path: "/main/testing"});
-
     }
   } catch (error: any) {
-    uiStore.notify(true, error.message, error as INotifier["error"]);
+    uiStore.notify(true, error?.message, error as INotifier["error"]);
   }
 }
 

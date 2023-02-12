@@ -18,6 +18,11 @@ import LoginPersonnelIdInput from "./LoginPersonnelIdInput.vue";
 import LoginStartTestButton from "./LoginStartTestingButton.vue";
 import LoginShowVirtualKeyboardButton from "./LoginShowVirtualKeyboardButton.vue"
 import LoginVirtualKeyboard from "./LoginVirtualKeyboard.vue";
+import {onMounted} from "vue";
+import {setAccessToken} from "../api";
+
+onMounted(async () => await setAccessToken());
+
 </script>
 
 <style scoped>

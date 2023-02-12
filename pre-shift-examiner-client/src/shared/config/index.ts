@@ -3,7 +3,7 @@ import {ErrorMessages} from "pre-shift-examiner-types";
 
 export const axiosInstance = axios.create({
     withCredentials: true,
-    baseURL: process.env.VUE_APP_SERVER_API
+    baseURL: process.env.VUE_APP_SERVER_API,
 });
 
 axiosInstance.interceptors.response.use(function (response) {

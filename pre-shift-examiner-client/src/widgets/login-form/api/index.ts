@@ -1,12 +1,11 @@
-import {IResponseObject} from "pre-shift-examiner-types/index";
+import {IResponseObject} from "pre-shift-examiner-types";
 import {userStore} from "@/store";
 import {axiosInstance} from "@/shared/config";
 
 export const login = async () => {
-
     const responseObject: IResponseObject = await axiosInstance.get(
-        process.env.VUE_APP_API_LOGIN, {
-        params: {
+        process.env.VUE_APP_API_LOGIN!, {
+            params: {
             "personnel-id": userStore.user.personnelId
         }
     });
@@ -16,4 +15,8 @@ export const login = async () => {
     } else {
         throw responseObject.error;
     }
+}
+
+export const setAccessToken = async () => {
+    await axiosInstance.get(process.env.VUE_APP_API_LOGIN!);
 }

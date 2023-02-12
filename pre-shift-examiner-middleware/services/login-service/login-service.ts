@@ -5,8 +5,7 @@ import {QC_SELECT_PERSONNEL_ID_SQL} from "./login-service-sql";
 
 class LoginService {
 
-    static async login(personnelId: IUser["personnelId"]): Promise<IResponseObject> {
-        const responseObject: IResponseObject = {httpStatusCode: 500};
+    static async login(personnelId: IUser["personnelId"], responseObject:IResponseObject): Promise<IResponseObject> {
 
         try {
             let queryResultRows: QueryResultRow[] = (await pool.query(QC_SELECT_PERSONNEL_ID_SQL(personnelId))).rows;

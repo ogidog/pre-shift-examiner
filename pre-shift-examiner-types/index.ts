@@ -1,4 +1,10 @@
-export type IAnswers = { [key: IQuestion["id"]]: IOption["id"][] }
+import {JwtPayload} from "jsonwebtoken";
+
+export interface IAnswers { [key: IQuestion["id"]]: IOption["id"][] }
+
+export interface IAccessTokenPayload extends JwtPayload{
+    requestTime: number
+}
 
 export interface IUser {
     id: number,
