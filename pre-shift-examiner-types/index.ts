@@ -1,8 +1,6 @@
-import {JwtPayload} from "jsonwebtoken";
-
 export interface IAnswers { [key: IQuestion["id"]]: IOption["id"][] }
 
-export interface IAccessTokenPayload extends JwtPayload{
+export interface IAccessTokenPayload{
     requestTime: number
 }
 
