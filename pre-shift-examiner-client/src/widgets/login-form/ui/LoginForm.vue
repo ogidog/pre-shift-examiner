@@ -1,6 +1,9 @@
 <template>
   <NotifierA>
     <div class="c-login">
+      <div>
+        <LogoTitle/>
+      </div>
       <div class="c-login__input-controls">
         <LoginPersonnelIdInput/>
         <LoginShowVirtualKeyboardButton/>
@@ -20,8 +23,8 @@ import LoginShowVirtualKeyboardButton from "./LoginShowVirtualKeyboardButton.vue
 import LoginVirtualKeyboard from "./LoginVirtualKeyboard.vue";
 import {onMounted} from "vue";
 import {setAccessToken} from "../api";
+import {LogoTitle} from "@/widgets/logo/ui"
 
-console.log(process.env.VUE_APP_API_COOKIES!)
 onMounted(async () => await setAccessToken());
 
 </script>

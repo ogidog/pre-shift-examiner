@@ -19,5 +19,6 @@ export const login = async () => {
 }
 
 export const setAccessToken = async () => {
+    console.log("dfdfdf")
     await axiosInstance.get(process.env.VUE_APP_API_COOKIES!);
 }
