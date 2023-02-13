@@ -2,8 +2,7 @@ import express, {Express} from "express";
 import {config} from "./shared/config"
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import {generateToken} from "./shared/services/jwt-service";
-import {IAccessTokenPayload} from "pre-shift-examiner-types";
+import AccessTokenCookie from "./shared/cookies/_at";
 
 config();
 
@@ -23,26 +22,13 @@ app.use(cors({
     credentials: true
 }));
 
-app.use((req, res, next) => {
+app.use("/cookies", (req, res)  => {
     try {
         const _at = req.cookies["_at"];
         if (!_at) {
-            const payload: IAccessTokenPayload = {requestTime: Date.now()}
-            const token = generateToken(
-                payload,
-                process.env.ACCESS_TOKEN_SECRET!,
-                {expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN!}
-            );
-            res.cookie('_at', token, {
-                "secure": process.env.NODE_ENV === "production",
-                "maxAge": parseInt(process.env.ACCESS_TOKEN_COOKIE_MAX_AGE!),
-                "sameSite": "strict",
-                "httpOnly": true
-            });
-            res.status(200).end();
-            return;
+            AccessTokenCookie.create(res);
         }
-        next();
+        res.status(200).end();
 
     } catch (e) {
         res.status(500).end();

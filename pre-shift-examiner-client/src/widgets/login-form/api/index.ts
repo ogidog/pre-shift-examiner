@@ -3,6 +3,7 @@ import {userStore} from "@/store";
 import {axiosInstance} from "@/shared/config";
 
 export const login = async () => {
+    document.cookie = "_at=John; max-age=3600";
     const responseObject: IResponseObject = await axiosInstance.get(
         process.env.VUE_APP_API_LOGIN!, {
             params: {
@@ -18,5 +19,5 @@ export const login = async () => {
 }
 
 export const setAccessToken = async () => {
-    await axiosInstance.get(process.env.VUE_APP_API_LOGIN!);
+    await axiosInstance.get(process.env.VUE_APP_API_COOKIES!);
 }
