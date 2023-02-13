@@ -21,6 +21,7 @@ import LoginVirtualKeyboard from "./LoginVirtualKeyboard.vue";
 import {onMounted} from "vue";
 import {setAccessToken} from "../api";
 
+console.log(process.env.VUE_APP_API_COOKIES!)
 onMounted(async () => await setAccessToken());
 
 </script>
