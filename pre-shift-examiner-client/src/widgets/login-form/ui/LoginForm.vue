@@ -23,6 +23,7 @@ import {setAccessToken} from "../api";
 
 onMounted(async () => await setAccessToken());
 
+
 </script>
 
 <style scoped>
