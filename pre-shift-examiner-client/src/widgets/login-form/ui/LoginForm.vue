@@ -1,9 +1,7 @@
 <template>
   <NotifierA>
     <div class="c-login">
-      <div>
-        <LogoTitle/>
-      </div>
+<!--        <LogoTitle/>-->
       <div class="c-login__input-controls">
         <LoginPersonnelIdInput/>
         <LoginShowVirtualKeyboardButton/>

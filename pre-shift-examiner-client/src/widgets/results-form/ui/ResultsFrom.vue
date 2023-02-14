@@ -1,5 +1,5 @@
 <template>
-  <div class="c-result-form">
+  <div class="c-result__form">
     <ResultsScoreTitle/>
     <ResultsScore/>
     <ResultsControlButtons/>
@@ -15,7 +15,7 @@ import ResultsControlButtons from "./ResultsControlButtons.vue";
 
 <style scoped>
 
-.c-result-form {
+.c-result__form {
   display: flex;
   flex-direction: column;
   justify-content: center;
