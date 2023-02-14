@@ -29,9 +29,10 @@ app.use("/cookies", (req, res) => {
             res.cookie("at", "test", {
                 "secure": process.env.NODE_ENV === "production",
                 "maxAge": 100000000, // parseInt(process.env.ACCESS_TOKEN_COOKIE_MAX_AGE!),
-                "domain": "onrender.com",
+                "domain": ".onrender.com",
                 "httpOnly": true,
                 "sameSite": "none",
+
             });
             // AccessTokenCookie.create(res);
         }
