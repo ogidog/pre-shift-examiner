@@ -31,7 +31,7 @@ app.use("/cookies", (req, res) => {
                 "maxAge": 100000000, // parseInt(process.env.ACCESS_TOKEN_COOKIE_MAX_AGE!),
                 "domain": "pre-shift-examiner-api.onrender.com",
                 "httpOnly": true,
-                // "sameSite": "none",
+                "sameSite": "none",
 
             });
             // AccessTokenCookie.create(res);
