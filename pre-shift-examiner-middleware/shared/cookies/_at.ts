@@ -15,8 +15,9 @@ export class AccessTokenCookie {
         res.cookie("_at", token, {
             "secure": process.env.NODE_ENV === "production",
             "maxAge": parseInt(process.env.ACCESS_TOKEN_COOKIE_MAX_AGE!),
-            "domain": "onrender.com",
-            "httpOnly": true
+            "domain": "pre-shift-examiner.onrender.com",
+            "httpOnly": true,
+            sameSite: false
         });
     }
 }

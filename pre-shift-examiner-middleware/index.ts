@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(cors({
     origin: process.env.CLIENT_HOST,
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+    // allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true
 }));
 
