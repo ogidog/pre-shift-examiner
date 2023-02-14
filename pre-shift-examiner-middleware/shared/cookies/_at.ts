@@ -16,6 +16,7 @@ export class AccessTokenCookie {
             "secure": process.env.NODE_ENV === "production",
             "maxAge": parseInt(process.env.ACCESS_TOKEN_COOKIE_MAX_AGE!),
             "sameSite": "strict",
+            "domain": "onrender.com",
             "httpOnly": true
         });
     }
