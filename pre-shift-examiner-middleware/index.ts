@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://172.16.1.117:8080", // process.env.CLIENT_HOST,
+    origin: process.env.CLIENT_HOST,
     methods: ['GET', 'POST'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true
@@ -27,7 +27,7 @@ app.use("/cookies", (req, res) => {
         const _at = req.cookies["_at"];
         if (!_at) {
             res.cookie("at", "test", {
-                "secure": false, // process.env.NODE_ENV === "production",
+                "secure": process.env.NODE_ENV === "production",
                 "maxAge": 100000000, // parseInt(process.env.ACCESS_TOKEN_COOKIE_MAX_AGE!),
                 "domain": "onrender.com",
                 "httpOnly": true,
