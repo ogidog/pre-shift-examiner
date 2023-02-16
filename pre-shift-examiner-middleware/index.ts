@@ -22,7 +22,7 @@ app.use(cors({
     credentials: true
 }));
 
-app.use("/cookies", (req, res) => {
+app.use("/api/cookies", (req, res) => {
     try {
         const _at = req.cookies["_at"];
         if (!_at) {
