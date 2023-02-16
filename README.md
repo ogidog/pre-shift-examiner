@@ -1,4 +1,4 @@
 # Предсменный экзаменатор
 
 Пример сервиса для тестирование сотрудников пердприятий перед началом смены и определение уровня их знаний в области безопасности труда.
-Доступен по адресу [https://pre-shift-examiner.onrender.com](http://pre-shift-examiner.onrender.com)
+Доступен по адресу [https://pre-shift-examiner-client.onrender.com](http://pre-shift-examiner-client.onrender.com)
