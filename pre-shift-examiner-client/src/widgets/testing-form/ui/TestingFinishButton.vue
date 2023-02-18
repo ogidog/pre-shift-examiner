@@ -21,7 +21,7 @@ const finishTestingHandler = async (e: Event) => {
     }
 
     uiStore.notify(true, NotifierMessages.CHECKING_ANSWERS);
-    const results = await checkAnswers(userStore.user.id, testingStore.answers);
+    const results = await checkAnswers(userStore.user.id, userStore.user.settingId, testingStore.answers);
     await testingStore.setResults(results);
     await router.push("/main/results");
     uiStore.notify(false);

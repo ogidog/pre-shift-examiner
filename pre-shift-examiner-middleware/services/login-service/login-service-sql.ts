@@ -1,7 +1,7 @@
 import {QueryConfig} from "pg";
 import {IUser} from "pre-shift-examiner-types";
 
-export const QC_SELECT_PERSONNEL_ID_SQL = (personnelId: IUser["personnelId"]): QueryConfig => {
+export const QC_SELECT_PERSONNEL_ID = (personnelId: IUser["personnelId"]): QueryConfig => {
     return {
         name: "QC_SELECT_PERSONNEL_ID_SQL",
         text: `SELECT work.users.id,

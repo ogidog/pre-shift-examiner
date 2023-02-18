@@ -1,13 +1,14 @@
 import express, {Express} from "express";
-import {config} from "./shared/config"
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import AccessTokenCookie from "./shared/cookies/_at";
+import dotenv from "dotenv";
 
-config();
+dotenv.config();
+dotenv.config({path: `${process.cwd()}/.env.${process.env.NODE_ENV}.local`});
 
 import testingRouter from "./routes/testing-router";
-import loginRouter from "./routes/login-router"
+import loginRouter from "./routes/login-router";
+import cookiesRouter from "./routes/cookies-router";
 
 const app: Express = express();
 const port: string = process.env.PORT || '3000';
@@ -22,19 +23,7 @@ app.use(cors({
     credentials: true
 }));
 
-app.use("/api/cookies", (req, res) => {
-    try {
-        const _at = req.cookies["_at"];
-        if (!_at) {
-            AccessTokenCookie.create(res);
-        }
-        res.status(200).end();
-
-    } catch (e) {
-        res.status(500).end();
-    }
-});
-
+app.use("/api/cookies", cookiesRouter);
 app.use("/api/testing", testingRouter);
 app.use("/api/auth", loginRouter);
 

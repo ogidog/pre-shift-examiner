@@ -1,14 +1,14 @@
 import {QueryResultRow} from "pg";
-import pool from "../../shared/services/db-services";
+import pool from "../db-services";
 import {IResponseObject, IUser, ErrorMessages} from "pre-shift-examiner-types";
-import {QC_SELECT_PERSONNEL_ID_SQL} from "./login-service-sql";
+import {QC_SELECT_PERSONNEL_ID} from "./login-service-sql";
 
 class LoginService {
 
     static async login(personnelId: IUser["personnelId"], responseObject:IResponseObject): Promise<IResponseObject> {
 
         try {
-            let queryResultRows: QueryResultRow[] = (await pool.query(QC_SELECT_PERSONNEL_ID_SQL(personnelId))).rows;
+            let queryResultRows: QueryResultRow[] = (await pool.query(QC_SELECT_PERSONNEL_ID(personnelId))).rows;
 
             if (queryResultRows.length != 1) return {
                 ...responseObject,

@@ -1,4 +1,4 @@
-import pool from "../../shared/services/db-services";
+import pool from "../db-services";
 import {QueryResultRow} from "pg";
 import {IQuestion, IResponseObject, ISettings, ErrorMessages, IUser, IAnswers, IResult} from "pre-shift-examiner-types";
 import {
@@ -24,10 +24,13 @@ class TestingService {
                 number_of_questions_per_test,
                 category_ids_per_test,
                 test_duration,
-                result_display_type
+                result_display_type,
             } = queryResultRows[0];
 
-            const settings: ISettings = {testDuration: test_duration, resultDisplayType: result_display_type}
+            const settings: ISettings = {
+                testDuration: test_duration,
+                resultDisplayType: result_display_type,
+            }
 
             queryResultRows = (await pool.query(QC_SELECT_QUESTIONS_WITH_OPTIONS(category_ids_per_test, number_of_questions_per_test))).rows;
             if (queryResultRows.length == 0) return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}};
@@ -59,13 +62,22 @@ class TestingService {
         }
     }
 
-    static async checkAnswers(userId: IUser["id"], answers: IAnswers, isSaveAnswers: boolean = true): Promise<IResponseObject> {
+    static async checkAnswers(userId: IUser["id"], settingId: IUser["settingId"], answers: IAnswers): Promise<IResponseObject> {
 
         const dateTime: number = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60 * 1000) / 1000);
         const responseObject: IResponseObject = {httpStatusCode: 500};
         const results = [] as IResult[];
 
         try {
+
+            let queryResultRows: QueryResultRow[] = (await pool.query(QC_SELECT_SETTINGS(settingId))).rows;
+            if (queryResultRows.length != 1) return {
+                ...responseObject,
+                error: {message: ErrorMessages.SERVER_ERROR}
+            };
+
+            const isSaveAnswers = queryResultRows[0]["is_save_answers"];
+
             await pool.query("BEGIN");
 
             for (let key in answers) {

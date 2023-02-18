@@ -18,10 +18,10 @@ export const startTesting = async (settingId: IUser["settingId"]) => {
 
 }
 
-export const checkAnswers = async (userId: IUser["id"], answers: IAnswers) => {
+export const checkAnswers = async (userId: IUser["id"], settingId: IUser["settingId"], answers: IAnswers) => {
     const responseObject: IResponseObject = await axiosInstance.post(
         process.env.VUE_APP_API_CHECK_ANSWERS!,
-        {"user-id": userId, answers: answers}
+        {"user-id": userId, "setting-id": settingId, answers: answers}
     );
 
     if (responseObject.results) {

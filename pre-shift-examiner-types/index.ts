@@ -25,8 +25,9 @@ export interface IResponseObject {
 export interface ISettings {
     testDuration: number,
     resultDisplayType: 'short' | 'detail',
-    category_ids_per_test?: number[],
-    number_of_questions_per_test?: number,
+    categoryIdsPerTest?: number[],
+    numberOfQuestionsPerTest?: number,
+    isSaveAnswers?: boolean,
 }
 
 export interface IQuestion {
@@ -42,10 +43,10 @@ export interface IOption {
 }
 
 export interface IResult {
-    question_id: IQuestion["id"],
-    option_ids: IOption["id"][],
-    is_correct: boolean,
-    correct_options_ids: IOption["id"][],
+    questionId: IQuestion["id"],
+    optionIds: IOption["id"][],
+    isCorrect: boolean,
+    correctOptionsIds: IOption["id"][],
 }
 
 export interface INotifier {
