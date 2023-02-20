@@ -16,7 +16,7 @@ import {testingStore} from "@/store";
 const score = computed(() => {
   let _ = 0;
   testingStore.results.forEach((result) => {
-    if (result.is_correct) {
+    if (result.isCorrect) {
       _ += 1;
     }
   });

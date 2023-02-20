@@ -8,7 +8,6 @@ dotenv.config({path: `${process.cwd()}/.env.${process.env.NODE_ENV}.local`});
 
 import testingRouter from "./routes/testing-router";
 import loginRouter from "./routes/login-router";
-import cookiesRouter from "./routes/cookies-router";
 
 const app: Express = express();
 const port: string = process.env.PORT || '3000';
@@ -23,7 +22,6 @@ app.use(cors({
     credentials: true
 }));
 
-app.use("/api/cookies", cookiesRouter);
 app.use("/api/testing", testingRouter);
 app.use("/api/auth", loginRouter);
 

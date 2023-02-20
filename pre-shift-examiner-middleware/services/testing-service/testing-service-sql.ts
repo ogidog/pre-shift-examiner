@@ -7,7 +7,7 @@ export const QC_SELECT_SETTINGS = (settingsId: IUser["settingId"]): QueryConfig 
         text: `SELECT work.settings.number_of_questions_per_test,
                       work.settings.category_ids_per_test,
                       work.settings.test_duration,
-                      work.settings.result_display_type, 
+                      work.settings.result_display_type,
                       work.settings.is_save_answers
                FROM work.settings
                WHERE work.settings.id = $1`,

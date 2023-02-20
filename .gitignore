@@ -16,3 +16,4 @@
 /pre-shift-examiner-middleware/.env.production.local
 /pre-shift-examiner-middleware/.env.dev
 /pre-shift-examiner-middleware/.env.production
+/docker/

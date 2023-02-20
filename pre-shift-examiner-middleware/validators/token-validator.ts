@@ -12,28 +12,28 @@ export const accessTokenValidator = async (req: Request, res: Response, next: Ne
         const accessTokenCookie = req.cookies["_at"];
 
         if (!accessTokenCookie) {
-            AccessTokenCookie.create(res, responseObject);
-            res.status(responseObject.httpStatusCode).send(responseObject);
+            AccessTokenCookie.create(res);
+            next();
             return;
         }
 
         const payload: IAccessTokenPayload = (await verifyToken(accessTokenCookie, process.env.ACCESS_TOKEN_SECRET!)) as IAccessTokenPayload;
         if (!payload) {
-            AccessTokenCookie.create(res, responseObject);
             res.status(responseObject.httpStatusCode).send(responseObject);
             return;
         }
 
-        if (Date.now() - payload.requestTime < Number(process.env.REQUEST_DELAY)) {
-            AccessTokenCookie.create(res, responseObject);
-            res.status(responseObject.httpStatusCode).send(responseObject);
+        if (+payload.loginAttempts > +process.env.MAX_LOGIN_ATTEMPTS!) {
+            res.status(responseObject.httpStatusCode).send({
+                ...responseObject,
+                error: {message: ErrorMessages.ATTEMPTS_EXCEEDED_ERROR}
+            });
             return;
         }
 
         next();
 
     } catch (e) {
-        AccessTokenCookie.create(res, responseObject);
         responseObject = {...responseObject, httpStatusCode: 500, error: {message: ErrorMessages.SERVER_ERROR}}
         res.status(responseObject.httpStatusCode).send(responseObject);
         return;

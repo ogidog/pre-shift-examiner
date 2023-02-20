@@ -4,7 +4,7 @@ import {IQuestion, IResponseObject, ISettings, ErrorMessages, IUser, IAnswers, I
 import {
     QC_SELECT_SETTINGS,
     QC_SELECT_QUESTIONS_WITH_OPTIONS,
-    QC_INSERT_ANSWERS
+    QC_INSERT_ANSWERS,
 } from "./testing-service-sql"
 
 class TestingService {
@@ -50,7 +50,7 @@ class TestingService {
                     options: option_ids.map((id: number, index: number) => {
                         return {id: id, content: option_contents[index]}
                     }),
-                    multiple: correct_true_counter > 1 ? true : false
+                    multiple: correct_true_counter > 1
                 };
                 questions.push(question);
             }
@@ -99,6 +99,7 @@ class TestingService {
             return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}};
         }
     }
+
 }
 
 export default TestingService;

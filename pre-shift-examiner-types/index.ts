@@ -1,7 +1,10 @@
-export interface IAnswers { [key: IQuestion["id"]]: IOption["id"][] }
+export interface IAnswers {
+    [key: IQuestion["id"]]: IOption["id"][]
+}
 
-export interface IAccessTokenPayload{
-    requestTime: number
+export interface IAccessTokenPayload {
+    loginAttempts: number,
+    //nextSessionTime: number,
 }
 
 export interface IUser {
@@ -10,7 +13,7 @@ export interface IUser {
     surname: string,
     name: string,
     patronymic: string,
-    settingId: number
+    settingId: number,
 }
 
 export interface IResponseObject {
@@ -63,6 +66,8 @@ export const ErrorMessages = {
     PERSONNEL_ID_ERROR: "Неправильный табельный номер",
     SERVER_ERROR: "Ошибка сервера",
     AUTH_ERROR: "Ошибка аутентификации",
+    TESTING_TIMEOUT_ERROR: "Повторное тестирование через",
+    ATTEMPTS_EXCEEDED_ERROR: "Превышено максимальное число попыток",
 }
 
 export const NotifierMessages = {

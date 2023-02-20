@@ -16,7 +16,3 @@ export const login = async () => {
         throw responseObject.error;
     }
 }
-
-export const setAccessToken = async () => {
-    await axiosInstance.get(process.env.VUE_APP_API_COOKIES!);
-}
