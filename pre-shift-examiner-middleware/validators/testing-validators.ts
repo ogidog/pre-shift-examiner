@@ -33,7 +33,6 @@ export const getQuestionsValidator = async (req: Request, res: Response, next: N
 
     } catch (e) {
         res.status(responseObject.httpStatusCode).send(responseObject);
-        return;
     }
 }
 

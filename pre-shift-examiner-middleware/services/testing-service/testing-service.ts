@@ -21,7 +21,7 @@ class TestingService {
 
     static async getQuestions(accessToken: any): Promise<IResponseObject> {
 
-        const responseObject: IResponseObject = {httpStatusCode: 500, error: {message: ErrorMessages.SERVER_ERROR}};
+        const responseObject: IResponseObject = {httpStatusCode: 500,};
 
         try {
 
@@ -39,7 +39,7 @@ class TestingService {
                 )
             )).rows;
             if (!queryResultRows.length) {
-                return responseObject;
+                return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}};
             }
 
             let questions: IQuestion[] = [];
@@ -72,15 +72,15 @@ class TestingService {
                 accessToken: accessToken,
             };
 
-        } catch (error) {
-            return responseObject;
+        } catch (e) {
+            return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}};
         }
     }
 
     static async checkAnswers(answers: IAnswers, accessToken: any): Promise<IResponseObject> {
 
+        const responseObject: IResponseObject = {httpStatusCode: 500,};
         const dateTime: number = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60 * 1000) / 1000);
-        const responseObject: IResponseObject = {httpStatusCode: 500, error: {message: ErrorMessages.SERVER_ERROR}};
         const results = [] as IResult[];
 
         try {
@@ -89,10 +89,20 @@ class TestingService {
             const userId = accessTokenPayload.id;
             const isSaveAnswers = accessTokenPayload.isSaveAnswers;
 
-            let queryResultRows = (await pool.query(QC_SELECT_SESSION_BY_USER_ID(accessTokenPayload.id,))).rows;
-            if (!queryResultRows.length) {
-                if (Math.floor(Date.now() / 1000) - +queryResultRows[0].last_testing_timestamp < +process.env.TESTING_TIMEOUT!) {
-                    return responseObject;
+            let queryResultRows = (await pool.query(QC_SELECT_SESSION_BY_USER_ID(accessTokenPayload.id))).rows;
+            if (queryResultRows.length) {
+                const timeToNextTesting = Math.floor(
+                    (Date.now()
+                        + new Date().getTimezoneOffset() * 60000
+                        - +queryResultRows[0].last_testing_timestamp)
+                    / 1000
+                );
+                if (timeToNextTesting <= +process.env.TESTING_TIMEOUT!) {
+                    return {
+                        ...responseObject,
+                        error: {message: `${ErrorMessages.TESTING_TIMEOUT_ERROR} ${+process.env.TESTING_TIMEOUT! - timeToNextTesting} c.`},
+                        accessToken: accessToken
+                    };
                 }
             }
 
@@ -114,9 +124,8 @@ class TestingService {
 
             return {...responseObject, httpStatusCode: 200, results: results, accessToken: accessToken};
 
-        } catch (error: any) {
-            await pool.query('ROLLBACK');
-            return responseObject;
+        } catch (e) {
+            return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}, accessToken: accessToken};
         }
     }
 }

@@ -27,7 +27,7 @@ export async function checkAnswers(req: Request, res: Response) {
     try {
         const params = req.body;
         const answers = params["answers"] as IAnswers;
-        const responseObject: IResponseObject = await TestingService.checkAnswers(req.cookies["_at"], answers);
+        const responseObject: IResponseObject = await TestingService.checkAnswers(answers, req.cookies["_at"],);
 
         let accessToken = responseObject.accessToken
         if (accessToken) {

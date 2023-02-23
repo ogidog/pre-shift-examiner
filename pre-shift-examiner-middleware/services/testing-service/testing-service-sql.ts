@@ -3,7 +3,7 @@ import {QueryConfig} from "pg";
 
 export const QC_INSERT_OR_UPDATE_SESSIONS = (userId: IUser["id"]): QueryConfig => {
     return {
-        name: "INSERT_OR_UPDATE_SESSIONS",
+        name: "TESTING_SERVICE_INSERT_OR_UPDATE_SESSIONS",
         text: `INSERT INTO work.sessions (user_id, last_testing_timestamp)
                values ($1, CURRENT_TIMESTAMP)
                ON CONFLICT (user_id) DO UPDATE SET last_testing_timestamp=CURRENT_TIMESTAMP`,
@@ -16,7 +16,7 @@ export const QC_SELECT_QUESTIONS_WITH_OPTIONS = (
     number_of_questions_per_test: ISettings["numberOfQuestionsPerTest"]): QueryConfig => {
 
     return {
-        name: "SELECT_QUESTIONS_WITH_OPTIONS",
+        name: "TESTING_SERVICE_SELECT_QUESTIONS_WITH_OPTIONS",
         text: `SELECT question.question_id,
                       question.question_text,
                       array_agg(work.options.id)                                       AS option_ids,
@@ -40,7 +40,7 @@ export const QC_INSERT_ANSWERS = (userId: IUser["id"],
                                   optionIds: IOption["id"][],
                                   dateTime: number): QueryConfig => {
     return {
-        name: "INSERT_ANSWERS",
+        name: "TESTING_SERVICE_INSERT_ANSWERS",
         text: `
             WITH correct_options as (SELECT array_agg(id) as ids
                                      FROM work.options
@@ -67,7 +67,7 @@ export const QC_INSERT_ANSWERS = (userId: IUser["id"],
 
 export const QC_SELECT_SESSION_BY_USER_ID = (userId: IUser["id"]): QueryConfig => {
     return {
-        name: "INSERT_ANSWERS",
+        name: "TESTING_SERVICE_SELECT_SESSION_BY_USER_ID",
         text: `SELECT *
                FROM work.sessions
                WHERE user_id = $1`,

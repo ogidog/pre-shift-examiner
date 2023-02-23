@@ -3,7 +3,7 @@ import {IAccessTokenPayload,} from "pre-shift-examiner-types";
 
 export class AccessTokenCookie {
 
-    static async onLogin(): Promise<any> {
+    static async create(): Promise<any> {
         try {
             const payload: IAccessTokenPayload | any = {loginAttempts: 1}
             const token = generateToken(
@@ -12,7 +12,7 @@ export class AccessTokenCookie {
                 {expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN!}
             );
 
-            return {
+            return Promise.resolve({
                 cookieValue: token,
                 cookieOptions: {
                     "secure": process.env.NODE_ENV === "production",
@@ -21,10 +21,10 @@ export class AccessTokenCookie {
                     "httpOnly": true,
                     "sameSite": process.env.NODE_ENV === "production" ? "none" : "strict"
                 }
-            }
+            });
 
         } catch (e) {
-            console.log(e)
+            return Promise.reject();
         }
     }
 

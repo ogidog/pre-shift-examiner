@@ -11,6 +11,13 @@ export const loginValidator = async (req: Request, res: Response, next: NextFunc
 
     try {
 
+        const personnelId = req.query["personnel-id"] as any;
+        const isValid = !validator.isEmpty(personnelId) && validator.isLength(personnelId, {min: 5, max: 16});
+        if (!isValid) {
+            res.status(responseObject.httpStatusCode).send(responseObject);
+            return;
+        }
+
         const accessToken = req.cookies["_at"];
         if (!accessToken) {
             next();
@@ -38,12 +45,7 @@ export const loginValidator = async (req: Request, res: Response, next: NextFunc
             return;
         }
 
-        const personnelId = req.query["personnel-id"] as any;
-        const isValid = !validator.isEmpty(personnelId) && validator.isLength(personnelId, {min: 5, max: 16});
-        if (!isValid) {
-            res.status(responseObject.httpStatusCode).send(responseObject);
-            return;
-        }
+        next();
 
     } catch (e) {
         responseObject = {...responseObject, httpStatusCode: 500, error: {message: ErrorMessages.SERVER_ERROR}}

@@ -3,7 +3,7 @@ import {IUser} from "pre-shift-examiner-types";
 
 export const QC_SELECT_USER_DATA_BY_PERSONNEL_ID = (personnelId: IUser["personnelId"]): QueryConfig => {
     return {
-        name: "SELECT_USER_DATA_BY_PERSONNEL_ID",
+        name: "LOGIN_SERVICE_SELECT_USER_DATA_BY_PERSONNEL_ID",
         text: `WITH auth_user AS (SELECT *
                                   from (SELECT work.users.id,
                                                work.users.personnel_id,
@@ -25,6 +25,6 @@ export const QC_SELECT_USER_DATA_BY_PERSONNEL_ID = (personnelId: IUser["personne
                       (EXTRACT(EPOCH FROM current_timestamp)::int -
                        EXTRACT(EPOCH FROM last_testing_timestamp)::int) as testing_timeout_remaining
                FROM auth_user`,
-        values: process.env.NODE_ENV === 'development' ? ['НИ00-0011'] : [personnelId],
+        values: process.env.NODE_ENV === 'development' ? ['НИ00-00111'] : [personnelId],
     }
 }

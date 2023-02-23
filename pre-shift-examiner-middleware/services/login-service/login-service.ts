@@ -8,11 +8,11 @@ import AccessTokenCookie from "../cookies-service";
 class LoginService {
 
     static async login(personnelId: IUser["personnelId"], accessToken: any): Promise<IResponseObject> {
-        const responseObject: IResponseObject = {httpStatusCode: 500, error: {message: ErrorMessages.SERVER_ERROR}};
+        const responseObject: IResponseObject = {httpStatusCode: 500,};
 
         try {
             if (!accessToken) {
-                accessToken = await AccessTokenCookie.onLogin();
+                accessToken = await AccessTokenCookie.create();
             }
 
             let queryResultRows: QueryResultRow[] = (await pool.query(QC_SELECT_USER_DATA_BY_PERSONNEL_ID(personnelId))).rows;
@@ -48,7 +48,7 @@ class LoginService {
             return {...responseObject, httpStatusCode: 200, user: user, accessToken: accessToken};
 
         } catch (e) {
-            return responseObject;
+            return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}};
         }
     }
 }
