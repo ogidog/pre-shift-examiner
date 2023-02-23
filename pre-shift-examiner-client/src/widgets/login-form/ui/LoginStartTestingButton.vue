@@ -10,7 +10,8 @@ import {login} from "../api";
 import {ButtonA} from "@/shared/ui/button-a";
 import {uiStore, userStore} from "@/store";
 import router from "@/router/router";
-import {NotifierMessages, INotifier} from "pre-shift-examiner-types"
+import {INotifier} from "pre-shift-examiner-types";
+import {NotifierMessages} from "../../../shared/constants";
 import {watch} from "vue";
 import {userValidator} from "@/widgets/login-form/validators";
 

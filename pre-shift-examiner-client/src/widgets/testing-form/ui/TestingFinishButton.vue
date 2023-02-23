@@ -4,9 +4,10 @@
 </template>
 
 <script setup lang="ts">
-import {NotifierMessages, INotifier} from "pre-shift-examiner-types";
+import {INotifier} from "pre-shift-examiner-types";
+import {NotifierMessages} from "../../../shared/constants";
 import {checkAnswers} from "../api";
-import {testingStore, uiStore, userStore} from "@/store";
+import {testingStore, uiStore,} from "@/store";
 import {ButtonA} from "@/shared/ui/button-a";
 import router from "@/router/router";
 
@@ -21,7 +22,7 @@ const finishTestingHandler = async (e: Event) => {
     }
 
     uiStore.notify(true, NotifierMessages.CHECKING_ANSWERS);
-    const results = await checkAnswers(userStore.user.id, userStore.user.settingId, testingStore.answers);
+    const results = await checkAnswers(testingStore.answers);
     await testingStore.setResults(results);
     await router.push("/main/results");
     uiStore.notify(false);

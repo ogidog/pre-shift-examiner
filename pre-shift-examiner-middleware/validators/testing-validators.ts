@@ -1,27 +1,43 @@
-import {IAnswers, IQuestion, IResponseObject, ErrorMessages} from "pre-shift-examiner-types";
+import {IAnswers, IResponseObject, IAccessTokenPayload} from "pre-shift-examiner-types";
+import {ErrorMessages} from "../shared/constants";
 import {NextFunction, Request, Response} from "express";
 import validator from "validator";
+import {verifyToken} from "../services/jwt-service"
 
-export const getQuestionsValidator = (req: Request, res: Response, next: NextFunction) => {
+export const getQuestionsValidator = async (req: Request, res: Response, next: NextFunction) => {
 
     let responseObject: IResponseObject = {httpStatusCode: 500, error: {message: ErrorMessages.SERVER_ERROR}};
 
     try {
-        let settingId = String(req.query["setting-id"]);
-        const isValid = validator.isNumeric(settingId);
-        if (!isValid) {
+
+        const accessToken = req.cookies["_at"];
+        if (!accessToken) {
             res.status(responseObject.httpStatusCode).send(responseObject);
             return;
         }
 
-        next();
+        const accessTokenPayload: IAccessTokenPayload = await verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET!);
+
+        if (!accessTokenPayload) {
+            res.status(responseObject.httpStatusCode).send(responseObject);
+            return;
+        }
+
+        if (accessTokenPayload.id && !accessTokenPayload.isGotQuestions) {
+            next();
+            return;
+        }
+
+        res.status(responseObject.httpStatusCode).send(responseObject);
+        return;
 
     } catch (e) {
         res.status(responseObject.httpStatusCode).send(responseObject);
+        return;
     }
 }
 
-export const checkAnswersValidator = (req: Request, res: Response, next: NextFunction) => {
+export const checkAnswersValidator = async (req: Request, res: Response, next: NextFunction) => {
     let responseObject: IResponseObject = {httpStatusCode: 500, error: {message: ErrorMessages.SERVER_ERROR}};
 
     const validateAnswersArray = (answers: any): boolean => {
@@ -36,21 +52,35 @@ export const checkAnswersValidator = (req: Request, res: Response, next: NextFun
     }
 
     try {
+
+        const accessToken = req.cookies["_at"];
+        if (!accessToken) {
+            res.status(responseObject.httpStatusCode).send(responseObject);
+            return;
+        }
+
+        const accessTokenPayload: IAccessTokenPayload = await verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET!);
+        if (!accessTokenPayload) {
+            res.status(responseObject.httpStatusCode).send(responseObject);
+            return;
+        }
+
         const params = req.body;
-        const userId = params["user-id"] as string;
-        const settingId = params["setting-id"] as string;
         const answers = params["answers"] as IAnswers;
 
-        const isValid = validator.isNumeric(String(userId))
-            && validator.isNumeric(String(settingId))
-            && validateAnswersArray(answers);
-
+        const isValid = validateAnswersArray(answers);
         if (!isValid) {
             res.status(responseObject.httpStatusCode).send(responseObject);
             return;
         }
 
-        next();
+        if (accessTokenPayload.id && accessTokenPayload.isGotQuestions) {
+            next();
+            return;
+        }
+
+        res.status(responseObject.httpStatusCode).send(responseObject);
+        return;
 
     } catch (e) {
         res.status(responseObject.httpStatusCode).send(responseObject);

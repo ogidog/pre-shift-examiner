@@ -1,17 +1,13 @@
 import {IUser, ISettings, IOption} from "pre-shift-examiner-types"
 import {QueryConfig} from "pg";
 
-export const QC_SELECT_SETTINGS = (settingsId: IUser["settingId"]): QueryConfig => {
+export const QC_INSERT_OR_UPDATE_SESSIONS = (userId: IUser["id"]): QueryConfig => {
     return {
-        name: "SELECT_SETTINGS",
-        text: `SELECT work.settings.number_of_questions_per_test,
-                      work.settings.category_ids_per_test,
-                      work.settings.test_duration,
-                      work.settings.result_display_type,
-                      work.settings.is_save_answers
-               FROM work.settings
-               WHERE work.settings.id = $1`,
-        values: [settingsId]
+        name: "INSERT_OR_UPDATE_SESSIONS",
+        text: `INSERT INTO work.sessions (user_id, last_testing_timestamp)
+               values ($1, CURRENT_TIMESTAMP)
+               ON CONFLICT (user_id) DO UPDATE SET last_testing_timestamp=CURRENT_TIMESTAMP`,
+        values: [userId]
     }
 }
 
@@ -20,7 +16,7 @@ export const QC_SELECT_QUESTIONS_WITH_OPTIONS = (
     number_of_questions_per_test: ISettings["numberOfQuestionsPerTest"]): QueryConfig => {
 
     return {
-        name: "QC_SELECT_QUESTIONS_WITH_OPTIONS",
+        name: "SELECT_QUESTIONS_WITH_OPTIONS",
         text: `SELECT question.question_id,
                       question.question_text,
                       array_agg(work.options.id)                                       AS option_ids,
@@ -44,7 +40,7 @@ export const QC_INSERT_ANSWERS = (userId: IUser["id"],
                                   optionIds: IOption["id"][],
                                   dateTime: number): QueryConfig => {
     return {
-        name: "QC_INSERT_ANSWERS",
+        name: "INSERT_ANSWERS",
         text: `
             WITH correct_options as (SELECT array_agg(id) as ids
                                      FROM work.options
@@ -66,5 +62,15 @@ export const QC_INSERT_ANSWERS = (userId: IUser["id"],
                  insert_result
         `,
         values: [userId, key, optionIds, dateTime]
+    }
+}
+
+export const QC_SELECT_SESSION_BY_USER_ID = (userId: IUser["id"]): QueryConfig => {
+    return {
+        name: "INSERT_ANSWERS",
+        text: `SELECT *
+               FROM work.sessions
+               WHERE user_id = $1`,
+        values: [userId],
     }
 }

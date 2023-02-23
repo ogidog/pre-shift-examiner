@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ErrorMessages} from "pre-shift-examiner-types";
+import {ErrorMessages} from "../constants";
 
 export const axiosInstance = axios.create({
     withCredentials: true,

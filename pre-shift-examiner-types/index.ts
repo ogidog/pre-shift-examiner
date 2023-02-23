@@ -2,18 +2,20 @@ export interface IAnswers {
     [key: IQuestion["id"]]: IOption["id"][]
 }
 
-export interface IAccessTokenPayload {
-    loginAttempts: number,
-    //nextSessionTime: number,
+export interface IAccessTokenPayload extends IUser, ISettings{
+    loginAttempts?: number,
+    isGotQuestions?: boolean,
+    iat?: number,
+    exp?: number,
 }
 
 export interface IUser {
-    id: number,
-    personnelId: string,
+    id?: number,
+    personnelId?: string,
     surname: string,
     name: string,
     patronymic: string,
-    settingId: number,
+    settingId?: number,
 }
 
 export interface IResponseObject {
@@ -23,14 +25,16 @@ export interface IResponseObject {
     settings?: ISettings,
     error?: IError,
     results?: IResult[],
+    accessToken?: any
 }
 
 export interface ISettings {
-    testDuration: number,
-    resultDisplayType: 'short' | 'detail',
-    categoryIdsPerTest?: number[],
     numberOfQuestionsPerTest?: number,
+    categoryIdsPerTest?: number[],
+    testDuration?: number,
+    resultDisplayType?: 'short' | 'detail',
     isSaveAnswers?: boolean,
+    testingTimeout?: number,
 }
 
 export interface IQuestion {
@@ -60,18 +64,4 @@ export interface INotifier {
 
 export interface IError {
     message: string,
-}
-
-export const ErrorMessages = {
-    PERSONNEL_ID_ERROR: "Неправильный табельный номер",
-    SERVER_ERROR: "Ошибка сервера",
-    AUTH_ERROR: "Ошибка аутентификации",
-    TESTING_TIMEOUT_ERROR: "Повторное тестирование через",
-    ATTEMPTS_EXCEEDED_ERROR: "Превышено максимальное число попыток",
-}
-
-export const NotifierMessages = {
-    AUTHENTICATION: "Аутентификация...",
-    TEST_LOADING: "Загрузка теста...",
-    CHECKING_ANSWERS: "Проверка ответов...",
 }

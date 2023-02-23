@@ -1,14 +1,9 @@
-import {IResponseObject, IUser, IAnswers} from "pre-shift-examiner-types";
+import {IResponseObject, IAnswers} from "pre-shift-examiner-types";
 import {axiosInstance} from "@/shared/config";
 
-export const startTesting = async (settingId: IUser["settingId"]) => {
+export const startTesting = async () => {
     const responseObject: IResponseObject = await axiosInstance.get(
-        process.env.VUE_APP_API_GET_QUESTIONS!,
-        {
-            params: {
-                "setting-id": settingId
-            }
-        });
+        process.env.VUE_APP_API_GET_QUESTIONS!,);
 
     if (!responseObject.error) {
         return responseObject;
@@ -18,10 +13,10 @@ export const startTesting = async (settingId: IUser["settingId"]) => {
 
 }
 
-export const checkAnswers = async (userId: IUser["id"], settingId: IUser["settingId"], answers: IAnswers) => {
+export const checkAnswers = async (answers: IAnswers) => {
     const responseObject: IResponseObject = await axiosInstance.post(
         process.env.VUE_APP_API_CHECK_ANSWERS!,
-        {"user-id": userId, "setting-id": settingId, answers: answers}
+        {answers: answers}
     );
 
     if (responseObject.results) {

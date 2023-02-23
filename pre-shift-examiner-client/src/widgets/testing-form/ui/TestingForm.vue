@@ -11,8 +11,8 @@
 
 <script async setup lang="ts">
 import {NotifierA} from "@/shared/ui/notifier-a";
-import {NotifierMessages} from "pre-shift-examiner-types"
-import {testingStore, uiStore, userStore} from "@/store";
+import {NotifierMessages} from "../../../shared/constants";
+import {testingStore, uiStore} from "@/store";
 import QuestionContainer from "./QuestionContainer.vue";
 import {startTesting} from "../api"
 import TestingControlButtonsContainer from "./TestingControlButtonsContainer.vue";
@@ -23,7 +23,7 @@ onMounted(async () => {
   try {
     uiStore.notify(true, NotifierMessages.TEST_LOADING);
 
-    const responseObject = await startTesting(userStore.user.settingId);
+    const responseObject = await startTesting();
     let {questions, settings} = responseObject;
     await testingStore.setQuestions(questions!);
     await testingStore.initAnswers();
