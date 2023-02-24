@@ -1,7 +1,7 @@
 import {QueryResultRow} from "pg";
 import pool from "../db-services";
 import {IResponseObject, IUser, IAccessTokenPayload} from "pre-shift-examiner-types";
-import {ErrorMessages} from "../../shared/constants"
+import {ErrorMessages, Units} from "../../shared/constants"
 import {QC_SELECT_USER_DATA_BY_PERSONNEL_ID} from "./login-service-sql";
 import AccessTokenCookie from "../cookies-service";
 
@@ -25,6 +25,19 @@ class LoginService {
                     error: {message: ErrorMessages.PERSONNEL_ID_ERROR},
                     accessToken: accessToken
                 }
+            }
+
+            if (
+                queryResultRows[0].time_pass_last_testing &&
+                +queryResultRows[0].time_pass_last_testing < +process.env.TESTING_TIMEOUT!
+            ) {
+                let timeForTestRemaining = Math.ceil((+process.env.TESTING_TIMEOUT! - +queryResultRows[0].time_pass_last_testing)
+                    / +Units.TESTING_TIMEOUT_SCALE!);
+                return {
+                    ...responseObject,
+                    httpStatusCode: 401,
+                    error: {message: `${ErrorMessages.TESTING_TIMEOUT_ERROR} ${timeForTestRemaining} ${Units.TESTING_TIMEOUT_UNIT}`},
+                };
             }
 
             const user: IUser = {

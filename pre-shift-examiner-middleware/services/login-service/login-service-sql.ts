@@ -23,8 +23,8 @@ export const QC_SELECT_USER_DATA_BY_PERSONNEL_ID = (personnelId: IUser["personne
                                            LEFT JOIN work.sessions ON t1.id = work.sessions.user_id)
                SELECT *,
                       (EXTRACT(EPOCH FROM current_timestamp)::int -
-                       EXTRACT(EPOCH FROM last_testing_timestamp)::int) as testing_timeout_remaining
+                       EXTRACT(EPOCH FROM last_testing_timestamp)::int) as time_pass_last_testing
                FROM auth_user`,
-        values: process.env.NODE_ENV === 'development' ? ['НИ00-00111'] : [personnelId],
+        values: process.env.NODE_ENV === 'development' ? ['НИ00-0011'] : [personnelId],
     }
 }

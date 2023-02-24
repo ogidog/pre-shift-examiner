@@ -68,7 +68,8 @@ export const QC_INSERT_ANSWERS = (userId: IUser["id"],
 export const QC_SELECT_SESSION_BY_USER_ID = (userId: IUser["id"]): QueryConfig => {
     return {
         name: "TESTING_SERVICE_SELECT_SESSION_BY_USER_ID",
-        text: `SELECT *
+        text: `SELECT (extract(EPOCH FROM current_timestamp)::int -
+                      extract(EPOCH FROM work.sessions.last_testing_timestamp)::int) as time_pass_last_testing
                FROM work.sessions
                WHERE user_id = $1`,
         values: [userId],

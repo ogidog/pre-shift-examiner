@@ -7,7 +7,7 @@ import {
     IAnswers,
     IResult
 } from "pre-shift-examiner-types";
-import {ErrorMessages} from "../../shared/constants"
+import {ErrorMessages, Units} from "../../shared/constants"
 import {
     QC_SELECT_QUESTIONS_WITH_OPTIONS,
     QC_INSERT_ANSWERS,
@@ -90,21 +90,17 @@ class TestingService {
             const isSaveAnswers = accessTokenPayload.isSaveAnswers;
 
             let queryResultRows = (await pool.query(QC_SELECT_SESSION_BY_USER_ID(accessTokenPayload.id))).rows;
-            if (queryResultRows.length) {
-                const timeToNextTesting = Math.floor(
-                    (Date.now()
-                        + new Date().getTimezoneOffset() * 60000
-                        - +queryResultRows[0].last_testing_timestamp)
-                    / 1000
-                );
-                if (timeToNextTesting <= +process.env.TESTING_TIMEOUT!) {
-                    return {
-                        ...responseObject,
-                        error: {message: `${ErrorMessages.TESTING_TIMEOUT_ERROR} ${+process.env.TESTING_TIMEOUT! - timeToNextTesting} c.`},
-                        accessToken: accessToken
-                    };
-                }
-            }
+            if (queryResultRows.length &&
+                +queryResultRows[0].time_pass_last_testing < +process.env.TESTING_TIMEOUT!
+            ) {
+                let timeForTestRemaining = Math.ceil((+process.env.TESTING_TIMEOUT! - +queryResultRows[0].time_pass_last_testing)
+                    / +Units.TESTING_TIMEOUT_SCALE!);
+                return {
+                    ...responseObject,
+                    httpStatusCode: 401,
+                    error: {message: `${ErrorMessages.TESTING_TIMEOUT_ERROR} ${timeForTestRemaining} ${Units.TESTING_TIMEOUT_UNIT}`},
+                };
+            };
 
             await pool.query("BEGIN");
 

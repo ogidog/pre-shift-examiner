@@ -4,7 +4,7 @@ import {axiosInstance} from "@/shared/config";
 export const startTesting = async () => {
     const responseObject: IResponseObject = await axiosInstance.get(
         process.env.VUE_APP_API_GET_QUESTIONS!,);
-    console.log(responseObject)
+
     if (!responseObject.error) {
         return responseObject;
     }

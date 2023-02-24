@@ -39,7 +39,6 @@ import {InfoPanel} from "@/widgets/info-panel/ui";
     width: 1025px;
     height: 768px;
   }
-
 }
 
 </style>
