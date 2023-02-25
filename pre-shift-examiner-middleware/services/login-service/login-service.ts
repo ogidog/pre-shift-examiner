@@ -7,23 +7,23 @@ import AccessTokenCookie from "../cookies-service";
 
 class LoginService {
 
-    static async login(personnelId: IUser["personnelId"], accessToken: any): Promise<IResponseObject> {
+    static async login(personnelId: IUser["personnelId"], accessTokenCookie: any): Promise<IResponseObject> {
         const responseObject: IResponseObject = {httpStatusCode: 500,};
 
         try {
-            if (!accessToken) {
-                accessToken = await AccessTokenCookie.create();
+            if (!accessTokenCookie.cookieValue) {
+                accessTokenCookie = await AccessTokenCookie.create();
             }
 
             let queryResultRows: QueryResultRow[] = (await pool.query(QC_SELECT_USER_DATA_BY_PERSONNEL_ID(personnelId))).rows;
 
             if (!queryResultRows.length) {
-                accessToken = await AccessTokenCookie.onError(accessToken.cookieValue);
+                accessTokenCookie = await AccessTokenCookie.onError(accessTokenCookie.cookieValue);
                 return {
                     ...responseObject,
                     httpStatusCode: 401,
                     error: {message: ErrorMessages.PERSONNEL_ID_ERROR},
-                    accessToken: accessToken
+                    accessTokenCookie: accessTokenCookie
                 }
             }
 
@@ -56,9 +56,9 @@ class LoginService {
                 testingTimeout: queryResultRows[0].testing_timeout,
             }
 
-            accessToken = await AccessTokenCookie.onLoggedIn(accessToken.cookieValue, newPayload);
+            accessTokenCookie = await AccessTokenCookie.onLoggedIn(accessTokenCookie.cookieValue, newPayload);
 
-            return {...responseObject, httpStatusCode: 200, user: user, accessToken: accessToken};
+            return {...responseObject, httpStatusCode: 200, user: user, accessTokenCookie: accessTokenCookie};
 
         } catch (e) {
             return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}};

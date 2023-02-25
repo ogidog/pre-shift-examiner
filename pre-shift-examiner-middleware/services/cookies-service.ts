@@ -36,7 +36,7 @@ export class AccessTokenCookie {
                 ...payload,
                 loginAttempts: +loginAttempts! + 1,
             };
-            const expirationTime = exp! - Math.floor(Date.now() / 1000);
+            const expirationTime = +exp! - Math.floor(Date.now() / 1000);
 
             delete payload.iat;
             delete payload.exp;

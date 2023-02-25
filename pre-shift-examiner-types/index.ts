@@ -25,7 +25,7 @@ export interface IResponseObject {
     settings?: ISettings,
     error?: IError,
     results?: IResult[],
-    accessToken?: any
+    accessTokenCookie?: any
 }
 
 export interface ISettings {

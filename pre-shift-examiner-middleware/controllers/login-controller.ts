@@ -7,12 +7,15 @@ export async function login(req: Request, res: Response) {
 
     try {
         let personnelId: IUser["personnelId"] = req.query["personnel-id"] as IUser["personnelId"];
-        const responseObject = await LoginService.login(personnelId, req.cookies["_at"]);
+        const responseObject = await LoginService.login(personnelId, {
+            cookieValue: req.cookies["_at"],
+            cookieOptions: {}
+        });
 
-        let accessToken = responseObject.accessToken
-        if(accessToken) {
-            res.cookie("_at", accessToken.cookieValue, accessToken.cookieOptions);
-            delete responseObject.accessToken;
+        let accessTokenCookie = responseObject.accessTokenCookie
+        if (accessTokenCookie) {
+            res.cookie("_at", accessTokenCookie.cookieValue, accessTokenCookie.cookieOptions);
+            delete responseObject.accessTokenCookie;
         }
 
         res.status(responseObject.httpStatusCode).send(responseObject);

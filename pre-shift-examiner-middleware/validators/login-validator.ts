@@ -32,7 +32,7 @@ export const loginValidator = async (req: Request, res: Response, next: NextFunc
         }
 
         if(!accessTokenPayload.loginAttempts){
-            responseObject = {...responseObject, httpStatusCode: 500, error: {message: ErrorMessages.SERVER_ERROR}}
+            responseObject = {...responseObject, httpStatusCode: 500, error: {message: ErrorMessages.AUTH_ERROR}}
             res.status(responseObject.httpStatusCode).send(responseObject);
             return;
         }

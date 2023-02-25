@@ -25,6 +25,6 @@ export const QC_SELECT_USER_DATA_BY_PERSONNEL_ID = (personnelId: IUser["personne
                       (EXTRACT(EPOCH FROM current_timestamp)::int -
                        EXTRACT(EPOCH FROM last_testing_timestamp)::int) as time_pass_last_testing
                FROM auth_user`,
-        values: process.env.NODE_ENV === 'development' ? ['НИ00-0011'] : [personnelId],
+        values: process.env.NODE_ENV === 'development' ? ['НИ00-00111'] : [personnelId],
     }
 }
