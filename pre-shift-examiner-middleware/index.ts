@@ -13,9 +13,9 @@ import loginRouter from "./routes/login-router";
 
 const speedLimiter = slowDown({
     windowMs: 3 * 60 * 1000, // 15 minutes
-    delayAfter: 30, // allow 100 requests per 15 minutes, then...
+    delayAfter: 15, // allow 100 requests per 15 minutes, then...
     delayMs: 500, // begin adding 500ms of delay per request above 100:
-    maxDelayMs: 30000,
+    maxDelayMs: 15000,
     skipSuccessfulRequests: true,
 });
 
