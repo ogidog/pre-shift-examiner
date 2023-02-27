@@ -1,2 +1,2 @@
-import LogoTitle from "./LogoTitle.vue";
-export {LogoTitle}
+import LogoA from "./LogoA.vue";
+export {LogoA}
