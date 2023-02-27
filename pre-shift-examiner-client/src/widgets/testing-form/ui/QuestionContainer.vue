@@ -28,5 +28,7 @@ const props = defineProps({question: {} as PropType<IQuestion | undefined>});
   align-items: center;
 
   width: 100%;
+
+  margin-bottom: 10px;
 }
 </style>

@@ -24,10 +24,25 @@ const props = defineProps({
   display: flex;
   align-items: center;
 
+
   width: 95%;
+  height: max-content;
+  min-height: 50px;
   margin-top: 10px;
   margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 
+  border: 1px solid lightgrey;
+
+  background: rgb(206, 222, 240);
+  background: linear-gradient(270deg, rgba(206, 222, 240, 1) 0%, rgba(239, 241, 245, 0.20211834733893552) 83%);
+
+}
+
+.c-option label {
+  /*min-height: 50px;*/
+  width: 100%;
 }
 
 .c-option * {

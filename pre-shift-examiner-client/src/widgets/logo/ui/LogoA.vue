@@ -14,17 +14,11 @@
   align-items: center;
   flex-direction: column;
 
-  position: absolute;
   font-family: Days;
-
   font-size: 200%;
 
-  top: 10px;
   width: 100%;
-  height: 30%;
 }
-
-
 
 .c-logo__span-cap-letter {
   font-family: Days;

@@ -1,13 +1,15 @@
 <template>
   <div class="c-login">
-    <LogoA/>
-    <LoginForm/>
+      <LogoA/>
+      <LoginForm/>
+      <CookieInformer/>
   </div>
 </template>
 
 <script setup lang="ts">
 import {LoginForm} from "@/widgets/login-form/ui";
 import LogoA from "@/widgets/logo/ui/LogoA.vue";
+import CookieInformer from "@/widgets/cookie-informer/CookieInformer.vue";
 </script>
 
 <style>
@@ -22,8 +24,8 @@ import LogoA from "@/widgets/logo/ui/LogoA.vue";
 
     display: flex;
     flex-direction: column;
-
     justify-content: flex-start;
+
     align-items: center;
 
     width: 468px;

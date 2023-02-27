@@ -9,7 +9,7 @@ let remainTime = ref(0);
 
 watch(() => testingStore.settings, (settings) => {
   if (settings.testDuration) {
-    remainTime.value = testingStore.settings.testDuration;
+    remainTime.value = testingStore.settings.testDuration!;
     countDownTimer = setInterval(() => {
       remainTime.value--;
 

@@ -1,8 +1,7 @@
 <template>
   <NotifierA>
-    <div class="c-login">
-<!--        <LogoTitle/>-->
-      <div class="c-login__input-controls">
+    <div class="c-login-form">
+      <div class="c-login-form__input-controls">
         <LoginPersonnelIdInput/>
         <LoginShowVirtualKeyboardButton/>
       </div>
@@ -19,23 +18,21 @@ import LoginPersonnelIdInput from "./LoginPersonnelIdInput.vue";
 import LoginStartTestButton from "./LoginStartTestingButton.vue";
 import LoginShowVirtualKeyboardButton from "./LoginShowVirtualKeyboardButton.vue"
 import LoginVirtualKeyboard from "./LoginVirtualKeyboard.vue";
-import {LogoTitle} from "@/widgets/logo/ui"
-
 
 </script>
 
 <style scoped>
-.c-login {
+.c-login-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-grow: 1;
 
   width: 100%;
-  height: 100%;
 }
 
-.c-login__input-controls {
+.c-login-form__input-controls {
   display: flex;
   justify-content: center;
   align-items: center;
