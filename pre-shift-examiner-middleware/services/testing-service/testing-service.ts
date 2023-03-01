@@ -14,18 +14,17 @@ import {
     QC_INSERT_OR_UPDATE_SESSIONS,
     QC_SELECT_SESSION_BY_USER_ID,
 } from "./testing-service-sql"
-import AccessTokenCookie from "../cookies-service";
 import {verifyToken} from "../jwt-service";
 
 class TestingService {
 
-    static async getQuestions(accessToken: any): Promise<IResponseObject> {
+    static async getQuestions(accessTokenCookie: any): Promise<IResponseObject> {
 
         const responseObject: IResponseObject = {httpStatusCode: 500,};
 
         try {
 
-            const accessTokenPayload: IAccessTokenPayload = await verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET!);
+            const accessTokenPayload: IAccessTokenPayload = await verifyToken(accessTokenCookie.cookieValue, process.env.ACCESS_TOKEN_SECRET!);
 
             const settings: ISettings = {
                 testDuration: accessTokenPayload.testDuration,
@@ -62,14 +61,11 @@ class TestingService {
                 questions.push(question);
             }
 
-            accessToken = await AccessTokenCookie.onGotQuestions(accessToken);
-
             return {
                 ...responseObject,
                 httpStatusCode: 200,
                 questions: questions,
                 settings: settings,
-                accessToken: accessToken,
             };
 
         } catch (e) {
@@ -77,14 +73,14 @@ class TestingService {
         }
     }
 
-    static async checkAnswers(answers: IAnswers, accessToken: any): Promise<IResponseObject> {
+    static async checkAnswers(answers: IAnswers, accessTokenCookie: any): Promise<IResponseObject> {
 
         const responseObject: IResponseObject = {httpStatusCode: 500,};
         const dateTime: number = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60 * 1000) / 1000);
         const results = [] as IResult[];
 
         try {
-            const accessTokenPayload: IAccessTokenPayload = await verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET!);
+            const accessTokenPayload: IAccessTokenPayload = await verifyToken(accessTokenCookie.cookieValue, process.env.ACCESS_TOKEN_SECRET!);
 
             const userId = accessTokenPayload.id;
             const isSaveAnswers = accessTokenPayload.isSaveAnswers;
@@ -99,14 +95,20 @@ class TestingService {
                     ...responseObject,
                     httpStatusCode: 401,
                     error: {message: `${ErrorMessages.TESTING_TIMEOUT_ERROR} ${timeForTestRemaining} ${Units.TESTING_TIMEOUT_UNIT}`},
-                };
-            };
+                }
+            }
 
             await pool.query("BEGIN");
 
             for (let key in answers) {
                 let optionIds = answers[key];
-                let queryResult: IResult = (await pool.query(QC_INSERT_ANSWERS(userId, Number(key), optionIds, dateTime))).rows[0];
+                let queryResultRows = (await pool.query(QC_INSERT_ANSWERS(userId, Number(key), optionIds, dateTime))).rows;
+                let queryResult: IResult = {
+                    questionId: queryResultRows[0].question_id,
+                    optionIds: queryResultRows[0].option_ids,
+                    isCorrect: queryResultRows[0].is_correct,
+                    correctOptionsIds: queryResultRows[0].ids
+                }
                 results.push(queryResult);
             }
 
@@ -118,10 +120,14 @@ class TestingService {
 
             await pool.query(QC_INSERT_OR_UPDATE_SESSIONS(userId));
 
-            return {...responseObject, httpStatusCode: 200, results: results, accessToken: accessToken};
+            return {...responseObject, httpStatusCode: 200, results: results, accessTokenCookie: accessTokenCookie};
 
         } catch (e) {
-            return {...responseObject, error: {message: ErrorMessages.SERVER_ERROR}, accessToken: accessToken};
+            return {
+                ...responseObject,
+                error: {message: ErrorMessages.SERVER_ERROR},
+                accessTokenCookie: accessTokenCookie
+            };
         }
     }
 }

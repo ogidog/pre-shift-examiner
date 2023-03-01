@@ -41,7 +41,6 @@ const props = defineProps({
 }
 
 .c-option label {
-  /*min-height: 50px;*/
   width: 100%;
 }
 

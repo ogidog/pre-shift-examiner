@@ -1,5 +1,8 @@
 <template>
-  <div class="c-login">
+  <div class="c-login" v-if="uiStore.notifier.visible">
+    <NotifierA />
+  </div>
+  <div class="c-login" v-else>
       <LogoA/>
       <LoginForm/>
       <CookieInformer/>
@@ -8,8 +11,10 @@
 
 <script setup lang="ts">
 import {LoginForm} from "@/widgets/login-form/ui";
+import {uiStore} from "@/store"
 import LogoA from "@/widgets/logo/ui/LogoA.vue";
 import CookieInformer from "@/widgets/cookie-informer/CookieInformer.vue";
+import NotifierA from "@/shared/ui/notifier-a/NotifierA.vue";
 </script>
 
 <style>

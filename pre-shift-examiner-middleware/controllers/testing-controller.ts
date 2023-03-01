@@ -6,14 +6,7 @@ import {ErrorMessages} from "../shared/constants";
 export async function getQuestions(req: Request, res: Response) {
 
     try {
-        const responseObject: IResponseObject = await TestingService.getQuestions(req.cookies["_at"]);
-
-        let accessToken = responseObject.accessToken
-        if (accessToken) {
-            res.cookie("_at", accessToken.cookieValue, accessToken.cookieOptions);
-            delete responseObject.accessToken;
-        }
-
+        const responseObject: IResponseObject = await TestingService.getQuestions({cookieValue: req.cookies["_at"]});
         res.status(responseObject.httpStatusCode).send(responseObject);
 
     } catch (e) {
@@ -27,12 +20,12 @@ export async function checkAnswers(req: Request, res: Response) {
     try {
         const params = req.body;
         const answers = params["answers"] as IAnswers;
-        const responseObject: IResponseObject = await TestingService.checkAnswers(answers, req.cookies["_at"],);
+        const responseObject: IResponseObject = await TestingService.checkAnswers(answers, {cookieValue: req.cookies["_at"]},);
 
-        let accessToken = responseObject.accessToken
-        if (accessToken) {
+        let accessTokenCookie = responseObject.accessTokenCookie
+        if (accessTokenCookie) {
             res.clearCookie("_at");
-            delete responseObject.accessToken;
+            delete responseObject.accessTokenCookie;
         }
 
         res.status(responseObject.httpStatusCode).send(responseObject);

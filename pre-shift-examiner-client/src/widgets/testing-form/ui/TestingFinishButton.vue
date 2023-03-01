@@ -5,8 +5,6 @@
 
 <script setup lang="ts">
 import {INotifier} from "pre-shift-examiner-types";
-import {NotifierMessages} from "../../../shared/constants";
-import {checkAnswers} from "../api";
 import {testingStore, uiStore,} from "@/store";
 import {ButtonA} from "@/shared/ui/button-a";
 import router from "@/router/router";
@@ -20,12 +18,7 @@ const finishTestingHandler = async (e: Event) => {
     for (const value of formData.values()) {
       testingStore.setAnswer(testingStore.questions[testingStore.currentQuestionIndex].id, Number(value));
     }
-
-    uiStore.notify(true, NotifierMessages.CHECKING_ANSWERS);
-    const results = await checkAnswers(testingStore.answers);
-    await testingStore.setResults(results);
     await router.push("/main/results");
-    uiStore.notify(false);
 
   } catch (error: any) {
     uiStore.notify(true, error.message, error as INotifier["error"]);

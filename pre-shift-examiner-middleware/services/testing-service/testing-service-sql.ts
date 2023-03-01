@@ -57,7 +57,7 @@ export const QC_INSERT_ANSWERS = (userId: IUser["id"],
             SELECT insert_result.question_id,
                    insert_result.option_ids,
                    insert_result.is_correct,
-                   correct_options.ids as correct_options_ids
+                   correct_options.ids
             FROM correct_options,
                  insert_result
         `,

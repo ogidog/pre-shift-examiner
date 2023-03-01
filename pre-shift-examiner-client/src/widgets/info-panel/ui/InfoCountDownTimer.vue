@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import {testingStore} from "@/store";
-import {ref, watch, watchEffect} from "vue";
+import {ref, watch, onMounted} from "vue";
 import router from "@/router/router";
 import {onBeforeRouteLeave} from "vue-router";
 
 let countDownTimer: number;
 let remainTime = ref(0);
 
-watch(() => testingStore.settings, (settings) => {
-  if (settings.testDuration) {
+onMounted(() => {
+  if (testingStore.settings.testDuration) {
     remainTime.value = testingStore.settings.testDuration!;
     countDownTimer = setInterval(() => {
       remainTime.value--;

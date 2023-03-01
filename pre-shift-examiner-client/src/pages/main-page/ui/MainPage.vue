@@ -1,11 +1,16 @@
 <template>
-  <div class="c-main">
+  <div class="c-main" v-if="uiStore.notifier.visible">
+    <NotifierA />
+  </div>
+  <div class="c-main" v-else>
     <InfoPanel/>
     <router-view></router-view>
   </div>
 </template>
 
 <script setup lang="ts">
+import {NotifierA} from "../../../shared/ui/notifier-a";
+import {uiStore} from "@/store";
 import {InfoPanel} from "@/widgets/info-panel/ui";
 </script>
 

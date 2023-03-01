@@ -73,7 +73,7 @@ export const checkAnswersValidator = async (req: Request, res: Response, next: N
             return;
         }
 
-        if (accessTokenPayload.id && accessTokenPayload.isGotQuestions) {
+        if (accessTokenPayload.id) {
             next();
             return;
         }

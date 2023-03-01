@@ -3,7 +3,7 @@ import {IAccessTokenPayload,} from "pre-shift-examiner-types";
 
 export class AccessTokenCookie {
 
-    static async create(): Promise<any> {
+    static async onLogin(): Promise<any> {
         try {
             const payload: IAccessTokenPayload | any = {loginAttempts: 1}
             const token = generateToken(
@@ -72,42 +72,6 @@ export class AccessTokenCookie {
                 ...newPayload,
             };
             const expirationTime = newPayload.testDuration! + 10;
-
-            delete payload.iat;
-            delete payload.exp;
-
-            token = generateToken(
-                payload,
-                process.env.ACCESS_TOKEN_SECRET!,
-                {expiresIn: `${expirationTime}s`}
-            );
-
-            return Promise.resolve({
-                cookieValue: token,
-                cookieOptions: {
-                    "secure": process.env.NODE_ENV === "production",
-                    "maxAge": expirationTime * 1000,
-                    "domain": process.env.COOKIES_DOMAIN,
-                    "httpOnly": true,
-                    "sameSite": process.env.NODE_ENV === "production" ? "none" : "strict"
-                }
-            });
-
-        } catch (e) {
-            return Promise.reject();
-        }
-    }
-
-    static async onGotQuestions(token: any) {
-
-        try {
-            let payload: IAccessTokenPayload | null = await verifyToken(token, process.env.ACCESS_TOKEN_SECRET!);
-            const {exp,} = payload!;
-            payload = {
-                ...payload,
-                isGotQuestions: true,
-            };
-            const expirationTime = exp! - Math.floor(Date.now() / 1000);
 
             delete payload.iat;
             delete payload.exp;

@@ -12,7 +12,7 @@ class LoginService {
 
         try {
             if (!accessTokenCookie.cookieValue) {
-                accessTokenCookie = await AccessTokenCookie.create();
+                accessTokenCookie = await AccessTokenCookie.onLogin();
             }
 
             let queryResultRows: QueryResultRow[] = (await pool.query(QC_SELECT_USER_DATA_BY_PERSONNEL_ID(personnelId))).rows;

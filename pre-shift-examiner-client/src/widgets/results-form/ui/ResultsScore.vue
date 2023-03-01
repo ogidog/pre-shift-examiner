@@ -10,17 +10,26 @@
 </template>
 
 <script setup lang="ts">
-import {computed} from "vue";
-import {testingStore} from "@/store";
+import {computed, onBeforeMount} from "vue";
+import {testingStore, uiStore} from "@/store";
+import {checkAnswers} from "@/widgets/testing-form/api";
+import {NotifierMessages} from "@/shared/constants";
 
 const score = computed(() => {
-  let _ = 0;
+  let _score = 0;
   testingStore.results.forEach((result) => {
     if (result.isCorrect) {
-      _ += 1;
+      _score += 1;
     }
   });
-  return _;
+  return _score;
+});
+
+onBeforeMount(async () => {
+  uiStore.notify(true, NotifierMessages.CHECKING_ANSWERS);
+  const results = await checkAnswers(testingStore.answers);
+  testingStore.setResults(results);
+  uiStore.notify(false);
 });
 
 </script>

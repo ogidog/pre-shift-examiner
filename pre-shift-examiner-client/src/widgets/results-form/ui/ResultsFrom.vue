@@ -1,9 +1,9 @@
 <template>
-  <div class="c-result__form">
-    <ResultsScoreTitle/>
-    <ResultsScore/>
-    <ResultsControlButtons/>
-  </div>
+    <div class="c-result__form">
+      <ResultsScoreTitle/>
+      <ResultsScore/>
+      <ResultsControlButtons/>
+    </div>
 </template>
 
 <script setup lang="ts">
