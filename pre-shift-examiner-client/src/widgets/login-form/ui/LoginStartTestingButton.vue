@@ -27,11 +27,13 @@ const clickHandler = async () => {
       userStore.setUser(user);
       uiStore.notify(false);
 
+      uiStore.notify(true, NotifierMessages.TEST_LOADING);
       const responseObject = await startTesting();
       let {questions, settings} = responseObject;
       testingStore.setQuestions(questions!);
       testingStore.initAnswers();
       testingStore.setSettings(settings!);
+      uiStore.notify(false);
 
       await router.push({path: "/main/testing"});
     }
