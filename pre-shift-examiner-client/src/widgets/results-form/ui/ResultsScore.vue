@@ -10,9 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onBeforeMount} from "vue";
+import {computed} from "vue";
 import {testingStore,} from "@/store";
-import {checkAnswers} from "@/widgets/testing-form/api";
 
 const score = computed(() => {
   let _score = 0;
@@ -22,11 +21,6 @@ const score = computed(() => {
     }
   });
   return _score;
-});
-
-onBeforeMount(async () => {
-  const results = await checkAnswers(testingStore.answers);
-  testingStore.setResults(results);
 });
 
 </script>
