@@ -11,9 +11,8 @@
 
 <script setup lang="ts">
 import {computed, onBeforeMount} from "vue";
-import {testingStore, uiStore} from "@/store";
+import {testingStore,} from "@/store";
 import {checkAnswers} from "@/widgets/testing-form/api";
-import {NotifierMessages} from "@/shared/constants";
 
 const score = computed(() => {
   let _score = 0;
@@ -26,10 +25,8 @@ const score = computed(() => {
 });
 
 onBeforeMount(async () => {
-  uiStore.notify(true, NotifierMessages.CHECKING_ANSWERS);
   const results = await checkAnswers(testingStore.answers);
   testingStore.setResults(results);
-  uiStore.notify(false);
 });
 
 </script>
