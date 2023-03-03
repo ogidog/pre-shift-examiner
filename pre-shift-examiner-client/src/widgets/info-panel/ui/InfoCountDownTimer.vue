@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import {testingStore} from "@/store";
-import {ref, watch, onMounted} from "vue";
+import {testingStore, uiStore} from "@/store";
+import {ref, onMounted} from "vue";
 import router from "@/router/router";
 import {onBeforeRouteLeave} from "vue-router";
 
-let countDownTimer: number;
 let remainTime = ref(0);
 
 onMounted(() => {
   if (testingStore.settings.testDuration) {
     remainTime.value = testingStore.settings.testDuration!;
-    countDownTimer = setInterval(() => {
+    let countDownTimer = setInterval(() => {
       remainTime.value--;
 
       if (remainTime.value === 0) {
@@ -18,12 +17,11 @@ onMounted(() => {
         router.push("/main/results");
       }
     }, 1000);
+    uiStore.setCountDownTimer(countDownTimer);
   }
 });
 
-watch(() => testingStore.results, () => clearInterval(countDownTimer))
-
-onBeforeRouteLeave(() => clearInterval(countDownTimer));
+onBeforeRouteLeave(() => clearInterval(uiStore.countDownTimer));
 
 </script>
 

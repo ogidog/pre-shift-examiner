@@ -1,8 +1,6 @@
 <template>
-  <div class="c-login" v-if="uiStore.notifier.visible">
-    <NotifierA />
-  </div>
-  <div class="c-main" v-else>
+  <div class="c-main">
+    <NotifierA v-if="uiStore.notifier.visible"/>
     <InfoPanel/>
     <router-view></router-view>
   </div>

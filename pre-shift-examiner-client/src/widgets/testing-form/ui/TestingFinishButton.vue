@@ -23,6 +23,8 @@ const finishTestingHandler = async (e: Event) => {
       testingStore.setAnswer(testingStore.questions[testingStore.currentQuestionIndex].id, Number(value));
     }
 
+    await clearInterval(uiStore.countDownTimer);
+
     const results = await checkAnswers(testingStore.answers);
     testingStore.setResults(results);
     await router.push("/main/results");

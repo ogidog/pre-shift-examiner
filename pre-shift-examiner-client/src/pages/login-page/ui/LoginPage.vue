@@ -1,8 +1,6 @@
 <template>
-  <div class="c-login" v-if="uiStore.notifier.visible">
-    <NotifierA />
-  </div>
-  <div class="c-login" v-else>
+  <div class="c-login">
+      <NotifierA v-if="uiStore.notifier.visible"/>
       <LogoA/>
       <LoginForm/>
       <CookieInformer/>
